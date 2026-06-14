@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Computer Vision — Mental Models</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main class="page">
+    <a class="back" href="../index.html">← Home</a>
+    <div class="eyebrow">Concept</div>
+    <h1>Computer Vision</h1>
+    <p class="subtitle">Computer vision is the field of making machines extract useful structure from images and video.</p>
+
+    <div class="diagram">
+      <div class="mini-flow">
+        <div class="flow-box"><strong>Input</strong><br>Image, video frame, scanned document, blueprint.</div>
+        <div class="arrow">↓</div>
+        <div class="flow-box"><strong>Vision model or pipeline</strong><br>Detect, classify, segment, read text, estimate layout.</div>
+        <div class="arrow">↓</div>
+        <div class="flow-box"><strong>Output</strong><br>Labels, boxes, masks, text, tables, key-value pairs.</div>
+      </div>
+    </div>
+
+    <h2>Simple mental model</h2>
+    <p>Computer vision is not one task. It is a toolbox. Different tasks produce different outputs. A detector gives boxes. A segmenter gives masks. OCR gives text. A layout model gives page structure.</p>
+
+    <h2>Connected concepts</h2>
+    <div class="tag-row">
+      <a class="tag" href="object-detection.html">Object detection</a>
+      <a class="tag" href="segmentation.html">Segmentation</a>
+      <a class="tag" href="ocr.html">OCR</a>
+    </div>
+  </main>
+</body>
+</html>

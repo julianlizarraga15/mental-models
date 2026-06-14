@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Segmentation — Mental Models</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main class="page">
+    <a class="back" href="../index.html">← Home</a>
+    <div class="eyebrow">Concept</div>
+    <h1>Segmentation</h1>
+    <p class="subtitle">Segmentation answers: which pixels belong to which thing?</p>
+
+    <div class="diagram">
+      <div class="mini-flow">
+        <div class="flow-box"><strong>Semantic segmentation</strong><br>Each pixel gets a class: road, wall, person, table.</div>
+        <div class="flow-box"><strong>Instance segmentation</strong><br>Each object instance gets its own mask: person 1, person 2.</div>
+        <div class="flow-box"><strong>Panoptic segmentation</strong><br>Combines class-level regions and individual object instances.</div>
+      </div>
+    </div>
+
+    <h2>Simple mental model</h2>
+    <p>Detection draws boxes. Segmentation paints the actual shape. If object boundaries matter, segmentation is usually better.</p>
+
+    <h2>When it is useful</h2>
+    <p>Use segmentation when the exact region matters: document layout regions, object shape, medical imaging, floorplans, roads, masks, or separating overlapping objects.</p>
+
+    <h2>Connected concepts</h2>
+    <div class="tag-row">
+      <a class="tag" href="computer-vision.html">Computer vision</a>
+      <a class="tag" href="object-detection.html">Object detection</a>
+      <a class="tag" href="ocr.html">OCR</a>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mental Models</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="eyebrow">Visual knowledge base</div>
+      <h1>Mental Models</h1>
+      <p class="subtitle">A growing map of concepts: short explanations, visual diagrams, and links between ideas.</p>
+    </section>
+
+    <section class="note">
+      <strong>How this works</strong>
+      <p>When a conversation produces a useful concept, we turn it into a small page. Each page should answer: what is it, where does it fit, why does it matter, and what is it connected to?</p>
+    </section>
+
+    <h2>Concept map</h2>
+    <div class="map horizontal">
+      <div class="node"><strong>Computer Vision</strong><span>How machines understand images.</span></div>
+      <div class="arrow">→</div>
+      <div class="node"><strong>Tasks</strong><span>Detection, segmentation, OCR, classification.</span></div>
+      <div class="arrow">→</div>
+      <div class="node"><strong>Models</strong><span>YOLO, DETR, Mask2Former, OCR pipelines.</span></div>
+    </div>
+
+    <h2>Starter concepts</h2>
+    <section class="grid">
+      <a class="concept-card" href="concepts/computer-vision.html">
+        <h3>Computer Vision</h3>
+        <p>The broad field: extracting structure and meaning from images.</p>
+      </a>
+      <a class="concept-card" href="concepts/object-detection.html">
+        <h3>Object Detection</h3>
+        <p>Find objects and draw boxes around them.</p>
+      </a>
+      <a class="concept-card" href="concepts/segmentation.html">
+        <h3>Segmentation</h3>
+        <p>Assign pixels to objects, regions, or classes.</p>
+      </a>
+      <a class="concept-card" href="concepts/ocr.html">
+        <h3>OCR</h3>
+        <p>Turn visual text into machine-readable text.</p>
+      </a>
+      <a class="concept-card" href="concepts/calibration.html">
+        <h3>Calibration</h3>
+        <p>Make model confidence match reality.</p>
+      </a>
+    </section>
+
+    <footer class="footer">
+      Built as static HTML so it works well on mobile and can be published with GitHub Pages.
+    </footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Object Detection — Mental Models</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main class="page">
+    <a class="back" href="../index.html">← Home</a>
+    <div class="eyebrow">Concept</div>
+    <h1>Object Detection</h1>
+    <p class="subtitle">Object detection answers: what objects are present, and where are they?</p>
+
+    <div class="diagram">
+      <div class="mini-flow">
+        <div class="flow-box"><strong>Image</strong><br>A blueprint, street photo, CCTV frame, document page.</div>
+        <div class="arrow">↓</div>
+        <div class="flow-box"><strong>Detector</strong><br>YOLO, DETR, RT-DETR, RF-DETR, etc.</div>
+        <div class="arrow">↓</div>
+        <div class="flow-box"><strong>Boxes + labels</strong><br>water closet: 92%, sink: 88%, door: 76%</div>
+      </div>
+    </div>
+
+    <h2>Simple mental model</h2>
+    <p>Detection is about rectangles. The model does not fully understand the object shape. It says: “I think this thing is inside this box.”</p>
+
+    <h2>When it is useful</h2>
+    <p>Use detection when a bounding box is enough: counting objects, locating symbols, finding fixtures, detecting people/cars, or cropping regions for later processing.</p>
+
+    <h2>Connected concepts</h2>
+    <div class="tag-row">
+      <a class="tag" href="computer-vision.html">Computer vision</a>
+      <a class="tag" href="segmentation.html">Segmentation</a>
+      <a class="tag" href="ocr.html">OCR</a>
+    </div>
+  </main>
+</body>
+</html>

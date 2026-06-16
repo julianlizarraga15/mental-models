@@ -9,7 +9,7 @@
 <body>
   <main class="page">
     <a class="back" href="../index.html">← Home</a>
-    <div class="eyebrow">Concept</div>
+    <div class="eyebrow">Parent concept</div>
     <h1>Computer Vision</h1>
     <p class="subtitle">Computer vision is the field of making machines extract useful structure from images and video.</p>
 
@@ -17,7 +17,7 @@
       <div class="mini-flow">
         <div class="flow-box"><strong>Input</strong><br>Image, video frame, scanned document, blueprint.</div>
         <div class="arrow">↓</div>
-        <div class="flow-box"><strong>Vision model or pipeline</strong><br>Detect, classify, segment, read text, estimate layout.</div>
+        <div class="flow-box"><strong>Computer vision task</strong><br>Detection, segmentation, OCR, classification, layout analysis.</div>
         <div class="arrow">↓</div>
         <div class="flow-box"><strong>Output</strong><br>Labels, boxes, masks, text, tables, key-value pairs.</div>
       </div>
@@ -26,11 +26,27 @@
     <h2>Simple mental model</h2>
     <p>Computer vision is not one task. It is a toolbox. Different tasks produce different outputs. A detector gives boxes. A segmenter gives masks. OCR gives text. A layout model gives page structure.</p>
 
-    <h2>Connected concepts</h2>
+    <h2>Inside computer vision</h2>
+    <section class="grid">
+      <a class="concept-card" href="object-detection.html">
+        <h3>Object Detection</h3>
+        <p>Find objects and draw boxes around them.</p>
+      </a>
+      <a class="concept-card" href="segmentation.html">
+        <h3>Segmentation</h3>
+        <p>Assign pixels to objects, regions, or classes.</p>
+      </a>
+      <a class="concept-card" href="ocr.html">
+        <h3>OCR</h3>
+        <p>Turn visual text into machine-readable text.</p>
+      </a>
+    </section>
+
+    <h2>Related but broader</h2>
     <div class="tag-row">
-      <a class="tag" href="object-detection.html">Object detection</a>
-      <a class="tag" href="segmentation.html">Segmentation</a>
-      <a class="tag" href="ocr.html">OCR</a>
+      <a class="tag" href="calibration.html">Calibration</a>
+      <span class="tag">Model evaluation</span>
+      <span class="tag">Data annotation</span>
     </div>
   </main>
 </body>

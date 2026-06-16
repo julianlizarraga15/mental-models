@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PDF Rasterization — Mental Models</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main class="page">
+    <a class="back" href="computer-vision.html">← Computer Vision</a>
+    <div class="eyebrow">Document input</div>
+    <h1>PDF Rasterization</h1>
+    <p class="subtitle">PDF page → image</p>
+
+    <div class="diagram">
+      <div class="visual-row">
+        <div class="flow-box"><div><strong>PDF</strong><span>page instructions</span></div></div>
+        <div class="arrow">→</div>
+        <div class="flow-box"><div><strong>Render</strong><span>choose DPI</span></div></div>
+        <div class="arrow">→</div>
+        <div class="flow-box"><div><strong>Image</strong><span>pixels for CV/OCR</span></div></div>
+      </div>
+    </div>
+
+    <h2>Why</h2>
+    <section class="grid">
+      <div class="concept-card"><div class="icon">PDF</div><div><h3>Not pixels</h3><p>until rendered</p></div></div>
+      <div class="concept-card"><div class="icon">🎯</div><div><h3>DPI matters</h3><p>more DPI → more pixels</p></div></div>
+      <div class="concept-card"><div class="icon">👁️</div><div><h3>Model input</h3><p>models see pixels</p></div></div>
+    </section>
+
+    <h2>Related</h2>
+    <div class="tag-row">
+      <a class="tag" href="dpi.html">DPI</a>
+      <a class="tag" href="common-image-formats.html">Image formats</a>
+      <a class="tag" href="ocr.html">OCR</a>
+    </div>
+  </main>
+</body>
+</html>

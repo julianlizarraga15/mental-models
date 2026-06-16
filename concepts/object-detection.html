@@ -8,30 +8,55 @@
 </head>
 <body>
   <main class="page">
-    <a class="back" href="../index.html">← Home</a>
-    <div class="eyebrow">Concept</div>
+    <a class="back" href="computer-vision.html">← Computer Vision</a>
+    <div class="eyebrow">Core CV task</div>
     <h1>Object Detection</h1>
-    <p class="subtitle">Object detection answers: what objects are present, and where are they?</p>
+    <p class="subtitle">image → boxes + labels + scores</p>
 
     <div class="diagram">
-      <div class="mini-flow">
-        <div class="flow-box"><strong>Image</strong><br>A blueprint, street photo, CCTV frame, document page.</div>
-        <div class="arrow">↓</div>
-        <div class="flow-box"><strong>Detector</strong><br>YOLO, DETR, RT-DETR, RF-DETR, etc.</div>
-        <div class="arrow">↓</div>
-        <div class="flow-box"><strong>Boxes + labels</strong><br>water closet: 92%, sink: 88%, door: 76%</div>
+      <div class="visual-row">
+        <div class="flow-box"><div><strong>Image</strong><span>photo / page / frame</span></div></div>
+        <div class="arrow">→</div>
+        <div class="flow-box"><div><strong>Detector</strong><span>find objects</span></div></div>
+        <div class="arrow">→</div>
+        <div class="flow-box"><div><strong>Output</strong><span>box + label + score</span></div></div>
       </div>
     </div>
 
-    <h2>Simple mental model</h2>
-    <p>Detection is about rectangles. The model does not fully understand the object shape. It says: “I think this thing is inside this box.”</p>
+    <h2>Outputs</h2>
+    <section class="grid">
+      <div class="concept-card"><div class="icon">▢</div><div><h3>Bounding box</h3><p>where</p></div></div>
+      <div class="concept-card"><div class="icon">🏷️</div><div><h3>Class label</h3><p>what</p></div></div>
+      <div class="concept-card"><div class="icon">92%</div><div><h3>Confidence</h3><p>how sure</p></div></div>
+    </section>
 
-    <h2>When it is useful</h2>
-    <p>Use detection when a bounding box is enough: counting objects, locating symbols, finding fixtures, detecting people/cars, or cropping regions for later processing.</p>
+    <h2>Model families</h2>
+    <section class="grid">
+      <div class="concept-card"><div class="icon">⚡</div><div><h3>One-stage</h3><p>YOLO-style</p></div></div>
+      <div class="concept-card"><div class="icon">▦</div><div><h3>Transformer</h3><p>DETR-style</p></div></div>
+      <div class="concept-card"><div class="icon">🏎️</div><div><h3>Real-time</h3><p>RT-DETR / YOLO</p></div></div>
+    </section>
 
-    <h2>Connected concepts</h2>
+    <h2>Training</h2>
+    <section class="grid">
+      <div class="concept-card"><div class="icon">✍️</div><div><h3>Annotations</h3><p>human boxes</p></div></div>
+      <div class="concept-card"><div class="icon">∩</div><div><h3>IoU</h3><p>box overlap</p></div></div>
+      <div class="concept-card"><div class="icon">⚓</div><div><h3>Anchors</h3><p>box guesses</p></div></div>
+      <div class="concept-card"><div class="icon">◎</div><div><h3>Anchor-free</h3><p>direct boxes</p></div></div>
+      <div class="concept-card"><div class="icon">✂️</div><div><h3>NMS</h3><p>remove duplicates</p></div></div>
+    </section>
+
+    <h2>Evaluation</h2>
+    <section class="grid">
+      <div class="concept-card"><div class="icon">✓</div><div><h3>Precision</h3><p>less false alarms</p></div></div>
+      <div class="concept-card"><div class="icon">🔎</div><div><h3>Recall</h3><p>less missed objects</p></div></div>
+      <div class="concept-card"><div class="icon">mAP</div><div><h3>mAP</h3><p>overall score</p></div></div>
+      <div class="concept-card"><div class="icon">0.5</div><div><h3>IoU threshold</h3><p>match rule</p></div></div>
+    </section>
+
+    <h2>Related</h2>
     <div class="tag-row">
-      <a class="tag" href="computer-vision.html">Computer vision</a>
+      <a class="tag" href="computer-vision.html">Computer Vision</a>
       <a class="tag" href="segmentation.html">Segmentation</a>
       <a class="tag" href="ocr.html">OCR</a>
     </div>

@@ -11,44 +11,50 @@
     <a class="back" href="computer-vision.html">← Computer Vision</a>
     <div class="eyebrow">Encoding</div>
     <h1>Base64</h1>
-    <p class="subtitle">bytes → text</p>
+    <p class="subtitle">bytes → text → bytes</p>
 
     <div class="diagram">
       <div class="visual-row">
-        <div class="flow-box"><div><strong>File</strong><span>image bytes</span></div></div>
+        <div class="flow-box"><div><strong>Input</strong><span>any file bytes</span></div></div>
         <div class="arrow">→</div>
-        <div class="flow-box"><div><strong>Base64</strong><span>text string</span></div></div>
+        <div class="flow-box"><div><strong>Base64</strong><span>text version</span></div></div>
         <div class="arrow">→</div>
-        <div class="flow-box"><div><strong>API</strong><span>JSON-safe</span></div></div>
+        <div class="flow-box"><div><strong>Output</strong><span>same bytes</span></div></div>
       </div>
     </div>
 
-    <h2>Tiny example</h2>
+    <h2>Text example</h2>
     <div class="diagram">
       <div class="visual-row">
-        <div class="flow-box"><div><strong>Hello</strong><span>original text</span></div></div>
+        <div class="flow-box"><div><strong>Hello</strong><span>original</span></div></div>
         <div class="arrow">→</div>
-        <div class="flow-box"><div><strong>SGVsbG8=</strong><span>base64 text</span></div></div>
+        <div class="flow-box"><div><strong>SGVsbG8=</strong><span>base64</span></div></div>
         <div class="arrow">→</div>
-        <div class="flow-box"><div><strong>Hello</strong><span>decoded back</span></div></div>
+        <div class="flow-box"><div><strong>Hello</strong><span>back again</span></div></div>
       </div>
     </div>
 
-    <h2>Image API shape</h2>
+    <h2>Image example</h2>
     <div class="diagram">
       <div class="visual-row">
-        <div class="flow-box"><div><strong>cat.png</strong><span>binary file</span></div></div>
+        <div class="flow-box"><div><strong>image file</strong><span>bytes</span></div></div>
         <div class="arrow">→</div>
-        <div class="flow-box"><div><strong>iVBORw0...</strong><span>long base64 string</span></div></div>
+        <div class="flow-box"><div><strong>long text</strong><span>base64</span></div></div>
         <div class="arrow">→</div>
-        <div class="flow-box"><div><strong>{ image }</strong><span>sent in JSON</span></div></div>
+        <div class="flow-box"><div><strong>image file</strong><span>bytes</span></div></div>
       </div>
     </div>
+
+    <h2>Why APIs use it</h2>
+    <section class="grid">
+      <div class="concept-card"><div class="icon">{ }</div><div><h3>JSON</h3><p>likes text</p></div></div>
+      <div class="concept-card"><div class="icon">🖼️</div><div><h3>Images</h3><p>are bytes</p></div></div>
+      <div class="concept-card"><div class="icon">0101</div><div><h3>Base64</h3><p>bytes as text</p></div></div>
+    </section>
 
     <h2>Remember</h2>
     <section class="grid">
       <div class="concept-card"><div class="icon">≠</div><div><h3>Not a format</h3><p>same file, encoded</p></div></div>
-      <div class="concept-card"><div class="icon">{ }</div><div><h3>API-friendly</h3><p>binary → text</p></div></div>
       <div class="concept-card"><div class="icon">↔</div><div><h3>Reversible</h3><p>text → bytes</p></div></div>
     </section>
 

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Logistic Regression — Mental Models</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main class="page">
+    <a class="back" href="machine-learning.html">← Machine Learning</a>
+    <div class="eyebrow">Classification model</div>
+    <h1>Logistic Regression</h1>
+    <p class="subtitle">features → probability → class</p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 720 300" width="100%" height="auto" aria-label="Sigmoid curve diagram">
+        <line x1="70" y1="245" x2="650" y2="245" stroke="currentColor" opacity=".45" stroke-width="3"/>
+        <line x1="70" y1="245" x2="70" y2="45" stroke="currentColor" opacity=".45" stroke-width="3"/>
+        <text x="660" y="250" fill="currentColor" opacity=".8" font-size="18">score</text>
+        <text x="26" y="42" fill="currentColor" opacity=".8" font-size="18">prob.</text>
+        <line x1="70" y1="145" x2="650" y2="145" stroke="currentColor" opacity=".25" stroke-width="2" stroke-dasharray="8 8"/>
+        <text x="84" y="136" fill="currentColor" opacity=".75" font-size="18">0.5 cutoff</text>
+        <path d="M80 232 C190 232 250 226 305 190 C345 164 360 120 395 92 C445 52 520 57 642 57" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+        <circle cx="150" cy="231" r="9" fill="currentColor" opacity=".45"/>
+        <circle cx="215" cy="227" r="9" fill="currentColor" opacity=".45"/>
+        <circle cx="280" cy="205" r="9" fill="currentColor" opacity=".45"/>
+        <circle cx="425" cy="78" r="9" fill="currentColor" opacity=".85"/>
+        <circle cx="500" cy="60" r="9" fill="currentColor" opacity=".85"/>
+        <circle cx="575" cy="57" r="9" fill="currentColor" opacity=".85"/>
+      </svg>
+    </div>
+
+    <h2>Main flow</h2>
+    <div class="diagram">
+      <div class="visual-row">
+        <div class="flow-box"><div><strong>Features</strong><span>x1, x2, x3</span></div></div>
+        <div class="arrow">→</div>
+        <div class="flow-box"><div><strong>Score</strong><span>linear sum</span></div></div>
+        <div class="arrow">→</div>
+        <div class="flow-box"><div><strong>Probability</strong><span>0 to 1</span></div></div>
+      </div>
+    </div>
+
+    <h2>Decision</h2>
+    <div class="diagram">
+      <div class="visual-row">
+        <div class="flow-box"><div><strong>P = 0.82</strong><span>above 0.5</span></div></div>
+        <div class="arrow">→</div>
+        <div class="flow-box"><div><strong>Class 1</strong><span>yes / positive</span></div></div>
+        <div class="arrow">|</div>
+        <div class="flow-box"><div><strong>P = 0.18</strong><span>class 0</span></div></div>
+      </div>
+    </div>
+
+    <h2>Formula shape</h2>
+    <section class="grid">
+      <div class="concept-card"><div class="icon">z</div><div><h3>Linear score</h3><p>β0 + β1x1 + ...</p></div></div>
+      <div class="concept-card"><div class="icon">S</div><div><h3>Sigmoid</h3><p>squash to 0..1</p></div></div>
+      <div class="concept-card"><div class="icon">p</div><div><h3>Probability</h3><p>P(class = 1)</p></div></div>
+    </section>
+
+    <h2>Remember</h2>
+    <section class="grid">
+      <div class="concept-card"><div class="icon">📈</div><div><h3>Regression name</h3><p>classification use</p></div></div>
+      <div class="concept-card"><div class="icon">0..1</div><div><h3>Output</h3><p>probability</p></div></div>
+      <div class="concept-card"><div class="icon">🎯</div><div><h3>Needs calibration</h3><p>probability should match reality</p></div></div>
+    </section>
+
+    <h2>Related</h2>
+    <div class="tag-row">
+      <a class="tag" href="machine-learning.html">Machine Learning</a>
+      <a class="tag" href="calibration.html">Calibration</a>
+      <span class="tag">Classification</span>
+    </div>
+  </main>
+</body>
+</html>

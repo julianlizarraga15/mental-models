@@ -23,6 +23,28 @@
       </div>
     </div>
 
+    <h2>Tiny example</h2>
+    <div class="diagram">
+      <div class="visual-row">
+        <div class="flow-box"><div><strong>Hello</strong><span>original text</span></div></div>
+        <div class="arrow">→</div>
+        <div class="flow-box"><div><strong>SGVsbG8=</strong><span>base64 text</span></div></div>
+        <div class="arrow">→</div>
+        <div class="flow-box"><div><strong>Hello</strong><span>decoded back</span></div></div>
+      </div>
+    </div>
+
+    <h2>Image API shape</h2>
+    <div class="diagram">
+      <div class="visual-row">
+        <div class="flow-box"><div><strong>cat.png</strong><span>binary file</span></div></div>
+        <div class="arrow">→</div>
+        <div class="flow-box"><div><strong>iVBORw0...</strong><span>long base64 string</span></div></div>
+        <div class="arrow">→</div>
+        <div class="flow-box"><div><strong>{ image }</strong><span>sent in JSON</span></div></div>
+      </div>
+    </div>
+
     <h2>Remember</h2>
     <section class="grid">
       <div class="concept-card"><div class="icon">≠</div><div><h3>Not a format</h3><p>same file, encoded</p></div></div>

@@ -17,14 +17,21 @@
       <div class="visual-row">
         <div class="flow-box"><div><strong>Input</strong><span>image / video / PDF</span></div></div>
         <div class="arrow">→</div>
-        <div class="flow-box"><div><strong>Task</strong><span>detect / segment / read</span></div></div>
+        <div class="flow-box"><div><strong>Task</strong><span>classify / detect / segment</span></div></div>
         <div class="arrow">→</div>
-        <div class="flow-box"><div><strong>Output</strong><span>boxes / masks / text</span></div></div>
+        <div class="flow-box"><div><strong>Output</strong><span>label / box / mask</span></div></div>
       </div>
     </div>
 
-    <h2>Inside</h2>
+    <h2>Core tasks</h2>
     <section class="grid">
+      <a class="concept-card" href="classification.html">
+        <div class="icon">🏷️</div>
+        <div>
+          <h3>Classification</h3>
+          <p>image → label</p>
+        </div>
+      </a>
       <a class="concept-card" href="object-detection.html">
         <div class="icon">▢</div>
         <div>
@@ -39,13 +46,38 @@
           <p>pixel → region</p>
         </div>
       </a>
+    </section>
+
+    <h2>Specialized areas</h2>
+    <section class="grid">
       <a class="concept-card" href="ocr.html">
         <div class="icon">Aa</div>
         <div>
-          <h3>OCR</h3>
-          <p>image text → text</p>
+          <h3>OCR / Document AI</h3>
+          <p>visual text → structure</p>
         </div>
       </a>
+      <div class="concept-card">
+        <div class="icon">🧍</div>
+        <div>
+          <h3>Pose</h3>
+          <p>body → keypoints</p>
+        </div>
+      </div>
+      <div class="concept-card">
+        <div class="icon">↝</div>
+        <div>
+          <h3>Tracking</h3>
+          <p>object → trajectory</p>
+        </div>
+      </div>
+      <div class="concept-card">
+        <div class="icon">◧</div>
+        <div>
+          <h3>Depth / 3D</h3>
+          <p>image → geometry</p>
+        </div>
+      </div>
     </section>
 
     <h2>Related</h2>

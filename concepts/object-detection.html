@@ -134,11 +134,11 @@
     <h2>mAP</h2>
     <div class="diagram">
       <div class="visual-row">
-        <div class="flow-box"><div><strong>Sort predictions</strong><span>highest confidence first</span></div></div>
+        <div class="flow-box"><div><strong>Rank boxes</strong><span>confidence high → low</span></div></div>
         <div class="arrow">→</div>
-        <div class="flow-box"><div><strong>Mark matches</strong><span>TP / FP using IoU</span></div></div>
+        <div class="flow-box"><div><strong>Mark correct</strong><span>same class + IoU ≥ threshold</span></div></div>
         <div class="arrow">→</div>
-        <div class="flow-box"><div><strong>Average precision</strong><span>area under precision-recall curve</span></div></div>
+        <div class="flow-box"><div><strong>Average</strong><span>AP per class → mean AP</span></div></div>
       </div>
     </div>
     <section class="grid">
@@ -154,22 +154,22 @@
           </svg>
         </div>
         <div>
-          <h3>AP for one class</h3>
-          <p>For one label, AP summarizes the precision-recall tradeoff across confidence thresholds.</p>
+          <h3>AP = one class</h3>
+          <p>AP is high when correct boxes appear before wrong boxes and most real objects are found.</p>
         </div>
       </div>
       <div class="concept-card">
         <div class="icon">mean</div>
         <div>
-          <h3>mAP</h3>
-          <p>mAP is the mean of AP scores. It averages across classes, and sometimes across IoU thresholds too.</p>
+          <h3>mAP = many classes</h3>
+          <p>mAP averages AP across labels: door, sink, toilet, etc.</p>
         </div>
       </div>
       <div class="concept-card">
-        <div class="icon">COCO</div>
+        <div class="icon">strict</div>
         <div>
-          <h3>mAP@[.50:.95]</h3>
-          <p>COCO-style mAP is stricter: it averages AP at IoU 0.50, 0.55, …, 0.95.</p>
+          <h3>IoU threshold matters</h3>
+          <p>mAP@0.5 is forgiving. mAP@[.50:.95] averages stricter thresholds and punishes sloppy boxes.</p>
         </div>
       </div>
     </section>

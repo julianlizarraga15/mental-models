@@ -5,65 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ETF Wrappers — Mental Models</title>
   <link rel="stylesheet" href="../assets/styles.css">
+  <style>
+    .table-card { margin-top: 18px; border: 1px solid var(--line); border-radius: 22px; background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.025)); box-shadow: 0 14px 36px rgba(0,0,0,.22); overflow: hidden; }
+    .table-scroll { overflow-x: auto; }
+    table { width: 100%; min-width: 880px; border-collapse: collapse; table-layout: fixed; }
+    th, td { padding: 16px 18px; text-align: left; vertical-align: top; }
+    th { color: var(--good); font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; border-bottom: 1px solid var(--line); background: rgba(255,255,255,.035); }
+    td { border-top: 1px solid rgba(255,255,255,.06); color: var(--muted); font-size: .94rem; line-height: 1.45; }
+    tbody tr:first-child td { border-top: 0; }
+    tbody tr:nth-child(even) { background: rgba(255,255,255,.025); }
+    tbody tr:hover { background: rgba(56,189,248,.055); }
+    .rank-col { width: 72px; } .buy-col { width: 230px; } .where-col { width: 190px; } .examples-col { width: 220px; }
+    .rank { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 999px; background: rgba(56,189,248,.12); border: 1px solid rgba(56,189,248,.28); color: var(--text); font-weight: 900; }
+    .title { display: block; color: var(--text); font-weight: 850; font-size: 1rem; line-height: 1.2; margin-bottom: 4px; }
+    .hint { display: block; color: var(--muted); font-size: .82rem; line-height: 1.35; }
+    .place { color: var(--text); font-weight: 650; }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .chip { display: inline-block; padding: 5px 9px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255,255,255,.045); color: var(--muted); font-size: .82rem; line-height: 1; white-space: nowrap; }
+    .good { color: var(--good); font-weight: 800; } .warn { color: #fde68a; font-weight: 800; }
+  </style>
 </head>
 <body>
   <main class="page">
     <a class="back" href="../index.html">← Home</a>
     <div class="eyebrow">Investing</div>
     <h1>ETF Wrappers</h1>
-    <p class="subtitle">same exposure → different wrapper → different taxes and costs</p>
+    <p class="subtitle">same exposure → different wrapper → different costs</p>
 
     <h2>Ranking: same underlying exposure</h2>
-    <div class="diagram">
-      <table>
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>What you buy</th>
-            <th>Where</th>
-            <th>Examples</th>
-            <th>Practical treatment</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>1</strong></td>
-            <td><strong>Liquid ETF CEDEAR</strong></td>
-            <td>IOL / PPI Argentina</td>
-            <td>SPY, IVV, QQQ, EEM, IWM</td>
-            <td>Best tax treatment: local sale generally exempt; lower local commissions; watch spread.</td>
-          </tr>
-          <tr>
-            <td><strong>2</strong></td>
-            <td><strong>Irish accumulating ETF</strong></td>
-            <td>PPI Global / IBKR</td>
-            <td>IWDA, CSPX, VUAA, VWRA</td>
-            <td>Good structure, but sale usually pays 15% on realized gain.</td>
-          </tr>
-          <tr>
-            <td><strong>3</strong></td>
-            <td><strong>Irish distributing ETF</strong></td>
-            <td>PPI Global / IBKR</td>
-            <td>VUSA, VWRD</td>
-            <td>Like Irish accumulating, but also distributes taxable dividends.</td>
-          </tr>
-          <tr>
-            <td><strong>4</strong></td>
-            <td><strong>USA ETF direct</strong></td>
-            <td>IOL USA / PPI Global / IBKR</td>
-            <td>VOO, VTI, VT, IVV, SPY</td>
-            <td>Usually worse: capital gains tax plus US dividend withholding.</td>
-          </tr>
-          <tr>
-            <td><strong>5</strong></td>
-            <td><strong>Illiquid CEDEAR</strong></td>
-            <td>IOL / PPI Argentina</td>
-            <td>thin order book / wide spread</td>
-            <td>Tax-efficient, but the spread can eat the advantage.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <div class="table-card"><div class="table-scroll"><table>
+      <thead><tr><th class="rank-col">Rank</th><th class="buy-col">What you buy</th><th class="where-col">Where</th><th class="examples-col">Examples</th><th>Practical treatment</th></tr></thead>
+      <tbody>
+        <tr><td><span class="rank">1</span></td><td><span class="title">Liquid ETF CEDEAR</span><span class="hint">Best default when available.</span></td><td><span class="place">IOL / PPI Argentina</span></td><td><div class="chips"><span class="chip">SPY</span><span class="chip">IVV</span><span class="chip">QQQ</span><span class="chip">EEM</span><span class="chip">IWM</span></div></td><td><span class="good">Best local treatment.</span> Sale is generally favorable; lower local commissions; watch spread.</td></tr>
+        <tr><td><span class="rank">2</span></td><td><span class="title">Irish accumulating ETF</span><span class="hint">Clean foreign wrapper.</span></td><td><span class="place">PPI Global / IBKR</span></td><td><div class="chips"><span class="chip">IWDA</span><span class="chip">CSPX</span><span class="chip">VUAA</span><span class="chip">VWRA</span></div></td><td>Good structure, but sale usually pays <span class="warn">15% on realized gain</span>.</td></tr>
+        <tr><td><span class="rank">3</span></td><td><span class="title">Irish distributing ETF</span><span class="hint">Similar, but pays cash.</span></td><td><span class="place">PPI Global / IBKR</span></td><td><div class="chips"><span class="chip">VUSA</span><span class="chip">VWRD</span></div></td><td>Like Irish accumulating, but also distributes dividends.</td></tr>
+        <tr><td><span class="rank">4</span></td><td><span class="title">USA ETF direct</span><span class="hint">Usually weakest setup.</span></td><td><span class="place">IOL USA / PPI Global / IBKR</span></td><td><div class="chips"><span class="chip">VOO</span><span class="chip">VTI</span><span class="chip">VT</span><span class="chip">IVV</span><span class="chip">SPY</span></div></td><td>Usually worse: realized gains plus US dividend withholding.</td></tr>
+        <tr><td><span class="rank">5</span></td><td><span class="title">Illiquid CEDEAR</span><span class="hint">Good structure, bad execution.</span></td><td><span class="place">IOL / PPI Argentina</span></td><td><div class="chips"><span class="chip">thin order book</span><span class="chip">wide spread</span></div></td><td>Can be efficient, but the spread can eat the advantage.</td></tr>
+      </tbody>
+    </table></div></div>
   </main>
 </body>
 </html>

@@ -135,6 +135,59 @@
       </div>
     </section>
 
+    <h2>AP</h2>
+    <div class="diagram">
+      <div class="visual-row">
+        <div class="flow-box"><div><strong>Sort one class</strong><span>highest score first</span></div></div>
+        <div class="arrow">→</div>
+        <div class="flow-box"><div><strong>Walk down list</strong><span>✓ raises recall · ✗ hurts precision</span></div></div>
+        <div class="arrow">→</div>
+        <div class="flow-box"><div><strong>Measure area</strong><span>under precision–recall curve</span></div></div>
+      </div>
+    </div>
+    <section class="grid">
+      <div class="concept-card">
+        <div class="icon">
+          <svg viewBox="0 0 220 130" width="220" height="130" aria-label="ranked detections for one class">
+            <text x="18" y="28" fill="currentColor" font-size="13">cat detections, sorted</text>
+            <rect x="18" y="42" width="42" height="32" rx="6" fill="currentColor" opacity=".18"/>
+            <rect x="69" y="42" width="42" height="32" rx="6" fill="currentColor" opacity=".18"/>
+            <rect x="120" y="42" width="42" height="32" rx="6" fill="currentColor" opacity=".08"/>
+            <rect x="171" y="42" width="32" height="32" rx="6" fill="currentColor" opacity=".18"/>
+            <text x="31" y="64" fill="currentColor" font-size="18">✓</text>
+            <text x="82" y="64" fill="currentColor" font-size="18">✓</text>
+            <text x="133" y="64" fill="currentColor" font-size="18">✗</text>
+            <text x="180" y="64" fill="currentColor" font-size="18">✓</text>
+            <text x="22" y="96" fill="currentColor" font-size="12">.96</text>
+            <text x="73" y="96" fill="currentColor" font-size="12">.88</text>
+            <text x="124" y="96" fill="currentColor" font-size="12">.70</text>
+            <text x="174" y="96" fill="currentColor" font-size="12">.61</text>
+            <path d="M42 108 H182" stroke="currentColor" opacity=".35" stroke-width="3"/>
+          </svg>
+        </div>
+        <div>
+          <h3>AP = one label</h3>
+          <p>For one class, rank every predicted box by confidence.</p>
+        </div>
+      </div>
+      <div class="concept-card">
+        <div class="icon">
+          <svg viewBox="0 0 220 130" width="220" height="130" aria-label="average precision area">
+            <path d="M35 105 H190 M35 105 V22" fill="none" stroke="currentColor" opacity=".45" stroke-width="3"/>
+            <path d="M42 36 H78 V52 H112 V76 H148 V94 H184" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+            <path d="M42 105 V36 H78 V52 H112 V76 H148 V94 H184 V105 Z" fill="currentColor" opacity=".14"/>
+            <text x="46" y="28" fill="currentColor" font-size="12">precision</text>
+            <text x="145" y="121" fill="currentColor" font-size="12">recall</text>
+            <text x="74" y="93" fill="currentColor" font-size="12">average height</text>
+          </svg>
+        </div>
+        <div>
+          <h3>Average precision</h3>
+          <p>AP summarizes the precision you keep as recall grows. Bigger filled area is better.</p>
+        </div>
+      </div>
+    </section>
+
     <h2>mAP</h2>
     <div class="diagram">
       <div class="visual-row">

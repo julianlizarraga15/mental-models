@@ -59,7 +59,7 @@
             <rect x="48" y="30" width="26" height="28" rx="2" fill="currentColor" opacity=".18"/>
           </svg>
         </div>
-        <div><h3>IoU</h3><p>box overlap</p></div>
+        <div><h3>IoU</h3><p>overlap / total covered area</p></div>
       </div>
       <div class="concept-card">
         <div class="icon">
@@ -96,12 +96,90 @@
       </div>
     </section>
 
+    <h2>IoU</h2>
+    <section class="grid">
+      <div class="concept-card">
+        <div class="icon">
+          <svg viewBox="0 0 220 130" width="220" height="130" aria-label="IoU visual">
+            <rect x="30" y="30" width="90" height="65" rx="6" fill="none" stroke="currentColor" opacity=".9" stroke-width="5"/>
+            <rect x="80" y="55" width="95" height="60" rx="6" fill="none" stroke="currentColor" opacity=".45" stroke-width="5"/>
+            <rect x="80" y="55" width="40" height="40" rx="3" fill="currentColor" opacity=".22"/>
+            <text x="35" y="22" fill="currentColor" font-size="12">ground truth</text>
+            <text x="120" y="123" fill="currentColor" font-size="12" opacity=".75">prediction</text>
+            <text x="86" y="79" fill="currentColor" font-size="13">overlap</text>
+          </svg>
+        </div>
+        <div>
+          <h3>Intersection over Union</h3>
+          <p>IoU asks: how much of the two boxes is shared?</p>
+          <p><strong>IoU = overlap area / total area covered by both boxes.</strong></p>
+        </div>
+      </div>
+      <div class="concept-card">
+        <div class="icon">0 → 1</div>
+        <div>
+          <h3>How to read it</h3>
+          <p>0 means no overlap. 1 means perfect match. A common rule is IoU ≥ 0.5 counts as a correct detection.</p>
+        </div>
+      </div>
+      <div class="concept-card">
+        <div class="icon">⚠️</div>
+        <div>
+          <h3>Important detail</h3>
+          <p>High confidence is not enough. A box can be very confident and still be wrong if its IoU is too low.</p>
+        </div>
+      </div>
+    </section>
+
+    <h2>mAP</h2>
+    <div class="diagram">
+      <div class="visual-row">
+        <div class="flow-box"><div><strong>Sort predictions</strong><span>highest confidence first</span></div></div>
+        <div class="arrow">→</div>
+        <div class="flow-box"><div><strong>Mark matches</strong><span>TP / FP using IoU</span></div></div>
+        <div class="arrow">→</div>
+        <div class="flow-box"><div><strong>Average precision</strong><span>area under precision-recall curve</span></div></div>
+      </div>
+    </div>
+    <section class="grid">
+      <div class="concept-card">
+        <div class="icon">
+          <svg viewBox="0 0 220 130" width="220" height="130" aria-label="precision recall curve">
+            <path d="M35 105 H190 M35 105 V20" fill="none" stroke="currentColor" opacity=".45" stroke-width="3"/>
+            <path d="M40 35 C70 42, 83 58, 100 70 S145 88, 185 100" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+            <path d="M40 105 L40 35 C70 42, 83 58, 100 70 S145 88, 185 100 L185 105 Z" fill="currentColor" opacity=".14"/>
+            <text x="72" y="23" fill="currentColor" font-size="12">precision</text>
+            <text x="144" y="121" fill="currentColor" font-size="12">recall</text>
+            <text x="87" y="96" fill="currentColor" font-size="12">AP area</text>
+          </svg>
+        </div>
+        <div>
+          <h3>AP for one class</h3>
+          <p>For one label, AP summarizes the precision-recall tradeoff across confidence thresholds.</p>
+        </div>
+      </div>
+      <div class="concept-card">
+        <div class="icon">mean</div>
+        <div>
+          <h3>mAP</h3>
+          <p>mAP is the mean of AP scores. It averages across classes, and sometimes across IoU thresholds too.</p>
+        </div>
+      </div>
+      <div class="concept-card">
+        <div class="icon">COCO</div>
+        <div>
+          <h3>mAP@[.50:.95]</h3>
+          <p>COCO-style mAP is stricter: it averages AP at IoU 0.50, 0.55, …, 0.95.</p>
+        </div>
+      </div>
+    </section>
+
     <h2>Evaluation</h2>
     <section class="grid">
-      <div class="concept-card"><div class="icon">✓</div><div><h3>Precision</h3><p>less false alarms</p></div></div>
-      <div class="concept-card"><div class="icon">🔎</div><div><h3>Recall</h3><p>less missed objects</p></div></div>
-      <div class="concept-card"><div class="icon">mAP</div><div><h3>mAP</h3><p>overall score</p></div></div>
-      <div class="concept-card"><div class="icon">0.5</div><div><h3>IoU threshold</h3><p>match rule</p></div></div>
+      <div class="concept-card"><div class="icon">✓</div><div><h3>Precision</h3><p>of predicted boxes, how many were real?</p></div></div>
+      <div class="concept-card"><div class="icon">🔎</div><div><h3>Recall</h3><p>of real objects, how many did we find?</p></div></div>
+      <div class="concept-card"><div class="icon">mAP</div><div><h3>mAP</h3><p>precision-recall quality, averaged</p></div></div>
+      <div class="concept-card"><div class="icon">0.5</div><div><h3>IoU threshold</h3><p>the minimum overlap to call a match</p></div></div>
     </section>
 
     <h2>Related</h2>

@@ -183,3 +183,27 @@ h2 {
     align-items: stretch;
   }
 }
+
+.concept-figure {
+  margin: 12px 0 18px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+  box-shadow: 0 8px 26px rgba(0,0,0,.18);
+}
+
+.concept-figure img {
+  display: block;
+  width: min(100%, 720px);
+  height: auto;
+  margin: 0 auto;
+  border-radius: 12px;
+}
+
+.concept-figure figcaption {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: .9rem;
+  text-align: center;
+}

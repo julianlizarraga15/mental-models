@@ -13,112 +13,56 @@
     <h1>ETF Wrappers</h1>
     <p class="subtitle">same exposure → different wrapper → different taxes and costs</p>
 
-    <div class="diagram">
-      <div class="visual-row">
-        <div class="flow-box"><div><strong>Exposure</strong><span>S&P 500 / World / EM</span></div></div>
-        <div class="arrow">→</div>
-        <div class="flow-box"><div><strong>Wrapper</strong><span>CEDEAR / UCITS / USA ETF</span></div></div>
-        <div class="arrow">→</div>
-        <div class="flow-box"><div><strong>Tax drag</strong><span>capital gains + dividends + spread</span></div></div>
-      </div>
-    </div>
-
-    <h2>Core model</h2>
-    <section class="grid">
-      <div class="note">
-        <div class="eyebrow">Rule</div>
-        <p><strong>Broker is not the main variable.</strong></p>
-        <p>IOL, PPI, PPI Global or IBKR change access and commissions. The tax treatment mostly follows the instrument.</p>
-      </div>
-      <div class="note">
-        <div class="eyebrow">Best case</div>
-        <p><strong>Same exposure + liquid CEDEAR available → usually prefer CEDEAR.</strong></p>
-        <p>Local sale is generally more tax efficient than selling a foreign ETF directly.</p>
-      </div>
-      <div class="note">
-        <div class="eyebrow">Fallback</div>
-        <p><strong>No good CEDEAR equivalent → Irish accumulating ETF.</strong></p>
-        <p>Cleaner product than USA direct ETFs for non-US investors, but Argentine capital gains still matter.</p>
-      </div>
-    </section>
-
     <h2>Ranking: same underlying exposure</h2>
-    <section class="grid">
-      <div class="concept-card">
-        <div class="icon">1</div>
-        <div>
-          <h3>Liquid ETF CEDEAR</h3>
-          <p>SPY, IVV, QQQ, EEM, IWM</p>
-          <p>Best Argentine tax treatment; watch spread/liquidity.</p>
-        </div>
-      </div>
-      <div class="concept-card">
-        <div class="icon">2</div>
-        <div>
-          <h3>Irish accumulating ETF</h3>
-          <p>IWDA, CSPX, VUAA, VWRA</p>
-          <p>Good structure; sale usually pays 15% on realized gain.</p>
-        </div>
-      </div>
-      <div class="concept-card">
-        <div class="icon">3</div>
-        <div>
-          <h3>Irish distributing ETF</h3>
-          <p>VUSA, VWRD</p>
-          <p>Like Irish accumulating, but also pays cash dividends.</p>
-        </div>
-      </div>
-      <div class="concept-card">
-        <div class="icon">4</div>
-        <div>
-          <h3>USA ETF direct</h3>
-          <p>VOO, VTI, VT, SPY</p>
-          <p>Usually worst for Argentina: capital gains + dividend withholding.</p>
-        </div>
-      </div>
-      <div class="concept-card">
-        <div class="icon">5</div>
-        <div>
-          <h3>Illiquid CEDEAR</h3>
-          <p>thin order book / wide spread</p>
-          <p>Tax-efficient, but the spread can eat the advantage.</p>
-        </div>
-      </div>
-    </section>
-
-    <h2>Decision tree</h2>
     <div class="diagram">
-      <div class="visual-row">
-        <div class="flow-box"><div><strong>Is there a liquid CEDEAR?</strong><span>same or close exposure</span></div></div>
-        <div class="arrow">→</div>
-        <div class="flow-box"><div><strong>Yes</strong><span>buy CEDEAR with limit order</span></div></div>
-        <div class="arrow">→</div>
-        <div class="flow-box"><div><strong>No</strong><span>use Irish accumulating ETF</span></div></div>
-      </div>
-    </div>
-
-    <h2>Examples</h2>
-    <section class="grid">
-      <div class="note">
-        <p><strong>S&P 500</strong></p>
-        <p>CEDEAR SPY/IVV usually beats CSPX/VUAA on Argentine tax simplicity.</p>
-      </div>
-      <div class="note">
-        <p><strong>World exposure</strong></p>
-        <p>No perfect VT-style CEDEAR? Use SPY + VEA + EEM, or accept IWDA/VWRA abroad.</p>
-      </div>
-      <div class="note">
-        <p><strong>Diversifying SPY</strong></p>
-        <p>EEM adds emerging markets. IWM adds US small caps. GLD adds gold, not equities.</p>
-      </div>
-    </section>
-
-    <h2>Related</h2>
-    <div class="tag-row">
-      <span class="tag">Taxes</span>
-      <span class="tag">CEDEARs</span>
-      <span class="tag">ETFs</span>
-      <span class="tag">Argentina</span>
+      <table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>What you buy</th>
+            <th>Where</th>
+            <th>Examples</th>
+            <th>Practical treatment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1</strong></td>
+            <td><strong>Liquid ETF CEDEAR</strong></td>
+            <td>IOL / PPI Argentina</td>
+            <td>SPY, IVV, QQQ, EEM, IWM</td>
+            <td>Best tax treatment: local sale generally exempt; lower local commissions; watch spread.</td>
+          </tr>
+          <tr>
+            <td><strong>2</strong></td>
+            <td><strong>Irish accumulating ETF</strong></td>
+            <td>PPI Global / IBKR</td>
+            <td>IWDA, CSPX, VUAA, VWRA</td>
+            <td>Good structure, but sale usually pays 15% on realized gain.</td>
+          </tr>
+          <tr>
+            <td><strong>3</strong></td>
+            <td><strong>Irish distributing ETF</strong></td>
+            <td>PPI Global / IBKR</td>
+            <td>VUSA, VWRD</td>
+            <td>Like Irish accumulating, but also distributes taxable dividends.</td>
+          </tr>
+          <tr>
+            <td><strong>4</strong></td>
+            <td><strong>USA ETF direct</strong></td>
+            <td>IOL USA / PPI Global / IBKR</td>
+            <td>VOO, VTI, VT, IVV, SPY</td>
+            <td>Usually worse: capital gains tax plus US dividend withholding.</td>
+          </tr>
+          <tr>
+            <td><strong>5</strong></td>
+            <td><strong>Illiquid CEDEAR</strong></td>
+            <td>IOL / PPI Argentina</td>
+            <td>thin order book / wide spread</td>
+            <td>Tax-efficient, but the spread can eat the advantage.</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </main>
 </body>

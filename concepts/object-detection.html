@@ -6,20 +6,36 @@
   <title>Object Detection — Mental Models</title>
   <link rel="stylesheet" href="../assets/styles.css">
   <style>
-    .metric-grid { grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); }
-    .metric-card { min-height: 88px; padding: 12px; }
-    .metric-card .icon { font-size: 1.25rem; margin-bottom: 8px; }
-    .metric-card h3 { font-size: .98rem; }
-    .metric-card p { font-size: .82rem; }
-    .metric-card.metric-wide { grid-column: span 2; }
+    .object-detection-page { --card-radius: 14px; }
+    .object-detection-page .page { width: min(800px, 100%); padding-top: 16px; }
+    .object-detection-page h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); }
+    .object-detection-page h2 { margin: 20px 0 8px; font-size: .78rem; letter-spacing: .11em; }
+    .object-detection-page .subtitle { font-size: .92rem; }
+    .object-detection-page .diagram { margin: 12px 0; padding: 10px; border-radius: var(--card-radius); }
+    .object-detection-page .flow-box { min-height: 58px; padding: 10px 12px; }
+    .object-detection-page .flow-box strong { font-size: .92rem; }
+    .object-detection-page .flow-box span { font-size: .78rem; }
+    .object-detection-page .arrow { font-size: 1.15rem; }
+    .object-detection-page .grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; }
+    .object-detection-page .concept-card { min-height: 88px; padding: 12px; border-radius: var(--card-radius); }
+    .object-detection-page .concept-card h3 { font-size: .98rem; }
+    .object-detection-page .concept-card p { font-size: .82rem; line-height: 1.35; }
+    .object-detection-page .icon { font-size: 1.35rem; margin-bottom: 8px; }
+    .object-detection-page .icon svg { width: 150px; height: auto; max-width: 100%; }
+    .object-detection-page .metric-grid { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
+    .object-detection-page .metric-card { min-height: 84px; }
+    .object-detection-page .metric-card.metric-wide { grid-column: span 2; }
     .metric-kicker { color: var(--good); font-weight: 800; }
+    .metric-formula { color: var(--text); font-weight: 750; }
+    .threshold-list { margin: 8px 0 0; padding-left: 17px; color: var(--muted); font-size: .82rem; line-height: 1.35; }
+    .threshold-list strong { color: var(--text); }
 
     @media (max-width: 520px) {
       .metric-card.metric-wide { grid-column: auto; }
     }
   </style>
 </head>
-<body>
+<body class="object-detection-page">
   <main class="page">
     <a class="back" href="computer-vision.html">← Computer Vision</a>
     <div class="eyebrow">Core CV task</div>
@@ -239,7 +255,7 @@
         <div class="icon">strict</div>
         <div>
           <h3>IoU threshold matters</h3>
-          <p>mAP@0.5 is forgiving. mAP@[.50:.95] averages stricter thresholds and punishes sloppy boxes.</p>
+          <p><strong>AP50</strong> uses IoU ≥ 0.50. <strong>AP75</strong> is stricter. <strong>mAP50–95</strong> averages 10 tests from .50 to .95.</p>
         </div>
       </div>
     </section>
@@ -248,10 +264,10 @@
     <section class="grid metric-grid">
       <div class="concept-card metric-card"><div class="icon">✓</div><div><h3>Precision</h3><p>of predicted boxes, how many were real?</p></div></div>
       <div class="concept-card metric-card"><div class="icon">🔎</div><div><h3>Recall</h3><p>of real objects, how many did we find?</p></div></div>
-      <div class="concept-card metric-card"><div class="icon">AP</div><div><h3>AP</h3><p>precision-recall quality for one class at one IoU threshold.</p></div></div>
-      <div class="concept-card metric-card"><div class="icon">mAP</div><div><h3>mAP</h3><p>mean AP: AP averaged across classes, and sometimes across IoU thresholds.</p></div></div>
-      <div class="concept-card metric-card metric-wide"><div class="icon">50</div><div><h3>mAP@50 / AP50</h3><p><span class="metric-kicker">Loose box test:</span> a detection counts if IoU ≥ 0.50. Good for “found it,” less strict about exact edges.</p></div></div>
-      <div class="concept-card metric-card metric-wide"><div class="icon">50:95</div><div><h3>mAP@50:95 / AP@[.50:.95]</h3><p><span class="metric-kicker">COCO-style stricter score:</span> average AP at IoU .50, .55, …, .95. Rewards tight, well-aligned boxes.</p></div></div>
+      <div class="concept-card metric-card"><div class="icon">AP</div><div><h3>AP</h3><p><span class="metric-formula">one class + one IoU cutoff.</span> Example: cat AP at IoU .50.</p></div></div>
+      <div class="concept-card metric-card"><div class="icon">mAP</div><div><h3>mAP</h3><p><span class="metric-formula">mean of AP scores.</span> Average over classes; COCO also averages IoU cutoffs.</p></div></div>
+      <div class="concept-card metric-card metric-wide"><div class="icon">.50</div><div><h3>AP50 / mAP50</h3><p><span class="metric-kicker">Loose localization.</span> A box counts correct when it overlaps the real box by at least 50% IoU.</p></div></div>
+      <div class="concept-card metric-card metric-wide"><div class="icon">.50:.95</div><div><h3>mAP50–95</h3><p><span class="metric-kicker">COCO headline metric.</span> Average the same detector at 10 IoU cutoffs:</p><ul class="threshold-list"><li><strong>.50</strong> generous: found the object</li><li><strong>.75</strong> tighter: good box</li><li><strong>.95</strong> very strict: near-perfect box</li></ul></div></div>
     </section>
 
     <h2>Related</h2>

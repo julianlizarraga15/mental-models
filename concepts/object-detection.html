@@ -5,6 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Object Detection — Mental Models</title>
   <link rel="stylesheet" href="../assets/styles.css">
+  <style>
+    .metric-grid { grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); }
+    .metric-card { min-height: 88px; padding: 12px; }
+    .metric-card .icon { font-size: 1.25rem; margin-bottom: 8px; }
+    .metric-card h3 { font-size: .98rem; }
+    .metric-card p { font-size: .82rem; }
+    .metric-card.metric-wide { grid-column: span 2; }
+    .metric-kicker { color: var(--good); font-weight: 800; }
+
+    @media (max-width: 520px) {
+      .metric-card.metric-wide { grid-column: auto; }
+    }
+  </style>
 </head>
 <body>
   <main class="page">
@@ -231,12 +244,14 @@
       </div>
     </section>
 
-    <h2>Evaluation</h2>
-    <section class="grid">
-      <div class="concept-card"><div class="icon">✓</div><div><h3>Precision</h3><p>of predicted boxes, how many were real?</p></div></div>
-      <div class="concept-card"><div class="icon">🔎</div><div><h3>Recall</h3><p>of real objects, how many did we find?</p></div></div>
-      <div class="concept-card"><div class="icon">mAP</div><div><h3>mAP</h3><p>precision-recall quality, averaged</p></div></div>
-      <div class="concept-card"><div class="icon">0.5</div><div><h3>IoU threshold</h3><p>the minimum overlap to call a match</p></div></div>
+    <h2>Metrics</h2>
+    <section class="grid metric-grid">
+      <div class="concept-card metric-card"><div class="icon">✓</div><div><h3>Precision</h3><p>of predicted boxes, how many were real?</p></div></div>
+      <div class="concept-card metric-card"><div class="icon">🔎</div><div><h3>Recall</h3><p>of real objects, how many did we find?</p></div></div>
+      <div class="concept-card metric-card"><div class="icon">AP</div><div><h3>AP</h3><p>precision-recall quality for one class at one IoU threshold.</p></div></div>
+      <div class="concept-card metric-card"><div class="icon">mAP</div><div><h3>mAP</h3><p>mean AP: AP averaged across classes, and sometimes across IoU thresholds.</p></div></div>
+      <div class="concept-card metric-card metric-wide"><div class="icon">50</div><div><h3>mAP@50 / AP50</h3><p><span class="metric-kicker">Loose box test:</span> a detection counts if IoU ≥ 0.50. Good for “found it,” less strict about exact edges.</p></div></div>
+      <div class="concept-card metric-card metric-wide"><div class="icon">50:95</div><div><h3>mAP@50:95 / AP@[.50:.95]</h3><p><span class="metric-kicker">COCO-style stricter score:</span> average AP at IoU .50, .55, …, .95. Rewards tight, well-aligned boxes.</p></div></div>
     </section>
 
     <h2>Related</h2>

@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Training Bottlenecks — Mental Models</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+  <style>
+    .training-page .page { width: min(1060px, 100%); }
+    .training-page h1 { font-size: clamp(2rem, 7vw, 3.4rem); }
+    .training-page h2 { margin-top: 22px; }
+    .pipeline {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(150px, 1fr));
+      gap: 8px;
+      min-width: 980px;
+    }
+    .stage {
+      min-height: 132px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(56,189,248,.13), rgba(255,255,255,.03));
+      position: relative;
+    }
+    .stage:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -14px;
+      top: 42%;
+      color: var(--muted);
+      font-weight: 900;
+      z-index: 2;
+    }
+    .stage strong { display: block; margin-bottom: 6px; }
+    .stage span { display: block; color: var(--muted); font-size: .8rem; line-height: 1.35; }
+    .stage .tiny { color: var(--good); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; font-weight: 800; }
+    .vram-card {
+      display: grid;
+      grid-template-columns: minmax(170px, .8fr) minmax(220px, 1.2fr);
+      gap: 12px;
+      align-items: stretch;
+    }
+    .stack {
+      display: flex;
+      flex-direction: column-reverse;
+      min-height: 360px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      background: var(--panel);
+    }
+    .stack div {
+      display: grid;
+      place-items: center;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,.14);
+      font-weight: 800;
+      padding: 8px;
+    }
+    .batch { flex: .8; background: rgba(167,243,208,.14); }
+    .weights { flex: 1; background: rgba(56,189,248,.13); }
+    .optim { flex: 1.25; background: rgba(251,191,36,.14); }
+    .grads { flex: .9; background: rgba(244,114,182,.14); }
+    .acts { flex: 2.7; background: rgba(248,250,252,.16); font-size: 1.2rem; }
+    .big-note {
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      text-align: center;
+    }
+    .big-note strong { font-size: clamp(1.7rem, 6vw, 3rem); line-height: 1; }
+    .knobs { width: 100%; border-collapse: collapse; overflow: hidden; border-radius: 16px; }
+    .knobs th, .knobs td { border: 1px solid var(--line); padding: 10px; text-align: left; vertical-align: top; }
+    .knobs th { color: var(--good); background: rgba(255,255,255,.06); font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; }
+    .knobs td { color: var(--muted); font-size: .9rem; }
+    .knobs td:first-child { color: var(--text); font-weight: 800; }
+    .compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .mini-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px;
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+    }
+    .mini-card h3 { margin: 0 0 10px; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 7px; }
+    .pill { border: 1px solid var(--line); border-radius: 999px; padding: 6px 9px; color: var(--muted); font-size: .84rem; }
+    .debug { display: grid; gap: 8px; max-width: 760px; margin: 0 auto; }
+    .debug-node {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+    }
+    .debug-branches { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .debug small { display: block; color: var(--good); font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
+    @media (max-width: 720px) {
+      .vram-card, .compare, .debug-branches { grid-template-columns: 1fr; }
+      .stack { min-height: 300px; }
+      .knobs { min-width: 640px; }
+    }
+  </style>
+</head>
+<body class="training-page">
+  <main class="page">
+    <a class="back" href="machine-learning.html">← Machine Learning</a>
+    <div class="eyebrow">Model training</div>
+    <h1>Training Bottlenecks</h1>
+    <p class="subtitle">Training is a pipeline. One stage is always slowest.</p>
+
+    <h2>Pipeline</h2>
+    <div class="diagram">
+      <div class="pipeline" aria-label="Training pipeline bottleneck diagram">
+        <div class="stage"><div class="tiny">source</div><strong>Dataset</strong><span>files · records · labels</span></div>
+        <div class="stage"><div class="tiny">Disk / I/O</div><strong>Read bytes</strong><span>slow reads · remote files · image loading</span></div>
+        <div class="stage"><div class="tiny">CPU</div><strong>Preprocess</strong><span>tokenization · image decoding · augmentations</span></div>
+        <div class="stage"><div class="tiny">Loader</div><strong>Workers</strong><span>num_workers · prefetching · RAM pressure</span></div>
+        <div class="stage"><div class="tiny">Transfer</div><strong>CPU → GPU</strong><span>pin_memory · transfer overhead</span></div>
+        <div class="stage"><div class="tiny">GPU</div><strong>Forward / backward</strong><span>compute · VRAM · batch · image size · sequence length · AMP/bf16</span></div>
+        <div class="stage"><div class="tiny">Update</div><strong>Optimizer step</strong><span>gradients · optimizer states</span></div>
+      </div>
+    </div>
+
+    <h2>VRAM stack</h2>
+    <section class="vram-card">
+      <div class="stack" aria-label="VRAM stack visual">
+        <div class="batch">current batch</div>
+        <div class="weights">model weights</div>
+        <div class="optim">optimizer states</div>
+        <div class="grads">gradients</div>
+        <div class="acts">activations</div>
+      </div>
+      <div class="big-note"><strong>Training memory<br>≠<br>model size</strong></div>
+    </section>
+
+    <h2>Knobs</h2>
+    <div class="diagram">
+      <table class="knobs">
+        <thead><tr><th>Knob</th><th>Helps with</th><th>Tradeoff</th></tr></thead>
+        <tbody>
+          <tr><td>Lower batch size</td><td>VRAM</td><td>noisier gradients or slower updates</td></tr>
+          <tr><td>AMP or bf16</td><td>VRAM + speed</td><td>possible numeric issues</td></tr>
+          <tr><td>Gradient accumulation</td><td>larger effective batch</td><td>slower per update</td></tr>
+          <tr><td>Checkpointing</td><td>VRAM</td><td>more compute</td></tr>
+          <tr><td>Lower image size</td><td>VRAM + speed</td><td>less visual detail</td></tr>
+          <tr><td>Lower sequence length</td><td>VRAM + speed</td><td>less context</td></tr>
+          <tr><td>More num_workers</td><td>GPU waiting</td><td>more CPU/RAM pressure</td></tr>
+          <tr><td>Pre-tokenize or cache</td><td>input speed</td><td>storage/preprocessing cost</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>CV vs NLP</h2>
+    <section class="compare">
+      <div class="mini-card">
+        <h3>RT-DETR / Vision</h3>
+        <div class="pill-row">
+          <span class="pill">image size</span><span class="pill">batch size</span><span class="pill">augmentations</span><span class="pill">image decoding</span><span class="pill">objects per image</span>
+        </div>
+      </div>
+      <div class="mini-card">
+        <h3>BERT / Text</h3>
+        <div class="pill-row">
+          <span class="pill">sequence length</span><span class="pill">batch size</span><span class="pill">padding strategy</span><span class="pill">tokenization</span><span class="pill">optimizer memory</span>
+        </div>
+      </div>
+    </section>
+    <section class="grid">
+      <div class="note"><strong>BERT</strong><p>512 tokens is expensive. Don’t use it by default.</p></div>
+      <div class="note"><strong>RT-DETR</strong><p>High resolution is expensive. Don’t use it by default.</p></div>
+    </section>
+
+    <h2>Debug flow</h2>
+    <div class="debug">
+      <div class="debug-node"><strong>Training is slow</strong></div>
+      <div class="arrow">↓</div>
+      <div class="debug-node"><strong>Is GPU utilization low?</strong></div>
+      <div class="debug-branches">
+        <div class="debug-node"><small>yes</small><strong>Input pipeline</strong><span>more num_workers · pre-tokenize/cache · simplify augmentation · check disk/network · pin_memory</span></div>
+        <div class="debug-node"><small>no</small><strong>Is VRAM full or OOM?</strong></div>
+      </div>
+      <div class="debug-branches">
+        <div class="debug-node"><small>yes</small><strong>Memory</strong><span>lower batch · AMP/bf16 · lower image/sequence · accumulation · checkpointing</span></div>
+        <div class="debug-node"><small>no</small><strong>GPU compute</strong><span>smaller model · faster GPU · lower resolution/sequence · architecture optimization</span></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

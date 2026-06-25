@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DETR — Mental Models</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main class="page">
+    <a class="back" href="object-detection.html">← Object Detection</a>
+    <div class="eyebrow">Transformer detector</div>
+    <h1>DETR</h1>
+    <p class="subtitle">image → features → object queries → boxes + labels</p>
+
+    <div class="diagram">
+      <div class="visual-row">
+        <div class="flow-box"><div><strong>Image</strong><span>input</span></div></div>
+        <div class="arrow">→</div>
+        <div class="flow-box"><div><strong>Backbone</strong><span>features</span></div></div>
+        <div class="arrow">→</div>
+        <div class="flow-box"><div><strong>Transformer</strong><span>global context</span></div></div>
+      </div>
+    </div>
+
+    <div class="diagram">
+      <div class="visual-row">
+        <div class="flow-box"><div><strong>Object queries</strong><span>fixed slots</span></div></div>
+        <div class="arrow">→</div>
+        <div class="flow-box"><div><strong>Predictions</strong><span>box + class or no object</span></div></div>
+      </div>
+    </div>
+
+    <section class="grid">
+      <div class="concept-card"><div class="icon">≠</div><div><h3>No anchors</h3><p>boxes directly</p></div></div>
+      <div class="concept-card"><div class="icon">1↔1</div><div><h3>Matching</h3><p>prediction ↔ object</p></div></div>
+      <div class="concept-card"><div class="icon">✂️</div><div><h3>No NMS</h3><p>set prediction</p></div></div>
+    </section>
+
+    <h2>Related</h2>
+    <div class="tag-row">
+      <a class="tag" href="object-detection.html">Object Detection</a>
+      <span class="tag">Transformers</span>
+      <span class="tag">RT-DETR</span>
+    </div>
+  </main>
+</body>
+</html>

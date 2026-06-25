@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Neural Networks — Mental Models</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main class="page">
+    <a class="back" href="../index.html">← Home</a>
+    <div class="eyebrow">Machine Learning</div>
+    <h1>Neural Networks</h1>
+    <p class="subtitle">inputs → weighted mixes → activations → prediction</p>
+
+    <h2>Forward pass</h2>
+    <figure class="concept-figure wide-figure">
+      <svg class="nn-svg" viewBox="0 0 920 360" role="img" aria-label="A small neural network showing inputs flowing through hidden layers into an output prediction">
+        <defs>
+          <marker id="arrowHead" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="currentColor"></path>
+          </marker>
+        </defs>
+
+        <text x="70" y="34" class="svg-label">Inputs</text>
+        <text x="305" y="34" class="svg-label">Hidden layer 1</text>
+        <text x="555" y="34" class="svg-label">Hidden layer 2</text>
+        <text x="790" y="34" class="svg-label">Output</text>
+
+        <g class="nn-links">
+          <line x1="130" y1="95" x2="350" y2="90"></line>
+          <line x1="130" y1="95" x2="350" y2="180"></line>
+          <line x1="130" y1="95" x2="350" y2="270"></line>
+          <line x1="130" y1="180" x2="350" y2="90"></line>
+          <line x1="130" y1="180" x2="350" y2="180"></line>
+          <line x1="130" y1="180" x2="350" y2="270"></line>
+          <line x1="130" y1="265" x2="350" y2="90"></line>
+          <line x1="130" y1="265" x2="350" y2="180"></line>
+          <line x1="130" y1="265" x2="350" y2="270"></line>
+
+          <line x1="410" y1="90" x2="600" y2="125"></line>
+          <line x1="410" y1="90" x2="600" y2="235"></line>
+          <line x1="410" y1="180" x2="600" y2="125"></line>
+          <line x1="410" y1="180" x2="600" y2="235"></line>
+          <line x1="410" y1="270" x2="600" y2="125"></line>
+          <line x1="410" y1="270" x2="600" y2="235"></line>
+
+          <line x1="660" y1="125" x2="800" y2="180" marker-end="url(#arrowHead)"></line>
+          <line x1="660" y1="235" x2="800" y2="180" marker-end="url(#arrowHead)"></line>
+        </g>
+
+        <g class="nn-nodes">
+          <circle cx="110" cy="95" r="30"></circle>
+          <circle cx="110" cy="180" r="30"></circle>
+          <circle cx="110" cy="265" r="30"></circle>
+          <circle cx="380" cy="90" r="30"></circle>
+          <circle cx="380" cy="180" r="30"></circle>
+          <circle cx="380" cy="270" r="30"></circle>
+          <circle cx="630" cy="125" r="30"></circle>
+          <circle cx="630" cy="235" r="30"></circle>
+          <circle cx="830" cy="180" r="36"></circle>
+        </g>
+
+        <g class="svg-node-text">
+          <text x="110" y="100">x₁</text>
+          <text x="110" y="185">x₂</text>
+          <text x="110" y="270">x₃</text>
+          <text x="380" y="95">h₁</text>
+          <text x="380" y="185">h₂</text>
+          <text x="380" y="275">h₃</text>
+          <text x="630" y="130">z₁</text>
+          <text x="630" y="240">z₂</text>
+          <text x="830" y="185">ŷ</text>
+        </g>
+
+        <text x="58" y="326" class="svg-caption">Raw numbers</text>
+        <text x="298" y="326" class="svg-caption">Each neuron detects a small pattern</text>
+        <text x="552" y="326" class="svg-caption">Patterns combine</text>
+        <text x="780" y="326" class="svg-caption">Final score</text>
+      </svg>
+      <figcaption>Training learns the connection strengths. Inference just pushes numbers left → right.</figcaption>
+    </figure>
+
+    <h2>One neuron</h2>
+    <div class="diagram">
+      <div class="visual-row compact-flow">
+        <div class="flow-box"><div><strong>Inputs</strong><span>x₁, x₂, x₃</span></div></div>
+        <div class="arrow">→</div>
+        <div class="flow-box"><div><strong>Weighted sum</strong><span>w₁x₁ + w₂x₂ + w₃x₃ + b</span></div></div>
+        <div class="arrow">→</div>
+        <div class="flow-box"><div><strong>Activation</strong><span>squash / bend / gate</span></div></div>
+      </div>
+    </div>
+
+    <figure class="concept-figure wide-figure">
+      <svg class="nn-svg" viewBox="0 0 920 280" role="img" aria-label="A neuron as a mixer that multiplies inputs by weights, adds bias, then applies an activation">
+        <g class="mini-inputs">
+          <rect x="45" y="48" width="150" height="42" rx="14"></rect>
+          <rect x="45" y="118" width="150" height="42" rx="14"></rect>
+          <rect x="45" y="188" width="150" height="42" rx="14"></rect>
+          <text x="120" y="75">x₁ · w₁</text>
+          <text x="120" y="145">x₂ · w₂</text>
+          <text x="120" y="215">x₃ · w₃</text>
+        </g>
+
+        <g class="nn-links">
+          <line x1="195" y1="69" x2="355" y2="140"></line>
+          <line x1="195" y1="139" x2="355" y2="140"></line>
+          <line x1="195" y1="209" x2="355" y2="140"></line>
+          <line x1="475" y1="140" x2="610" y2="140" marker-end="url(#arrowHead)"></line>
+          <line x1="735" y1="140" x2="850" y2="140" marker-end="url(#arrowHead)"></line>
+        </g>
+
+        <g class="nn-nodes">
+          <circle cx="415" cy="140" r="62"></circle>
+          <circle cx="675" cy="140" r="62"></circle>
+        </g>
+
+        <g class="svg-node-text">
+          <text x="415" y="132">sum</text>
+          <text x="415" y="154">+ bias</text>
+          <text x="675" y="132">activation</text>
+          <text x="675" y="154">ReLU / sigmoid</text>
+        </g>
+
+        <rect x="810" y="108" width="92" height="64" rx="18" class="output-pill"></rect>
+        <text x="856" y="134" class="svg-node-text">new</text>
+        <text x="856" y="156" class="svg-node-text">feature</text>
+      </svg>
+      <figcaption>A neuron is not magic: it is a tiny learned feature maker.</figcaption>
+    </figure>
+
+    <h2>What layers do</h2>
+    <section class="grid">
+      <div class="note">
+        <strong>Early layers</strong>
+        <p>Detect simple signals: edges, words, prices, distances.</p>
+      </div>
+      <div class="note">
+        <strong>Middle layers</strong>
+        <p>Combine simple signals into reusable patterns.</p>
+      </div>
+      <div class="note">
+        <strong>Late layers</strong>
+        <p>Turn patterns into the task output: class, score, box, token.</p>
+      </div>
+    </section>
+
+    <h2>Mental model</h2>
+    <div class="note">
+      <strong>A neural network is a stack of learned transformations.</strong>
+      <p>Each layer rewrites the data into a more useful representation. The last layer reads that representation and produces the prediction.</p>
+    </div>
+
+    <h2>Related</h2>
+    <div class="tag-row">
+      <a class="tag" href="machine-learning.html">Machine Learning</a>
+      <a class="tag" href="logistic-regression.html">Logistic Regression</a>
+      <a class="tag" href="computer-vision.html">Computer Vision</a>
+      <span class="tag">Deep Learning</span>
+    </div>
+  </main>
+</body>
+</html>

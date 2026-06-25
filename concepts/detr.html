@@ -5,36 +5,76 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>DETR — Mental Models</title>
   <link rel="stylesheet" href="../assets/styles.css">
+  <style>
+    .detr-page .page { width: min(760px, 100%); }
+    .detr-page h1 { font-size: clamp(2rem, 12vw, 3.4rem); }
+    .detr-page .subtitle { max-width: 620px; }
+    .detr-card { padding: 12px; }
+    .detr-mini { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 16px 0; }
+    .detr-figure { padding: 12px; }
+    .detr-svg { width: 100%; height: auto; display: block; color: var(--accent); }
+    .detr-svg text { fill: var(--text); font-weight: 750; font-size: 13px; }
+    .detr-svg .muted { fill: var(--muted); font-size: 11px; font-weight: 600; }
+    .detr-svg .box { fill: rgba(15,23,42,.75); stroke: var(--line); stroke-width: 2; }
+    .detr-svg .hot { stroke: var(--accent); }
+    .detr-svg .soft { fill: currentColor; opacity: .16; }
+    .detr-svg .line { stroke: currentColor; stroke-width: 2.5; opacity: .8; }
+    .detr-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .detr-grid .note { padding: 10px; min-height: 0; }
+    .detr-grid p { font-size: .8rem; }
+    @media (max-width: 560px) { .detr-grid { grid-template-columns: 1fr; } }
+  </style>
 </head>
-<body>
+<body class="detr-page">
   <main class="page">
     <a class="back" href="object-detection.html">← Object Detection</a>
     <div class="eyebrow">Transformer detector</div>
     <h1>DETR</h1>
-    <p class="subtitle">image → features → object queries → boxes + labels</p>
+    <p class="subtitle">Detection as fixed slots: each slot predicts one object, or nothing.</p>
 
-    <div class="diagram">
-      <div class="visual-row">
-        <div class="flow-box"><div><strong>Image</strong><span>input</span></div></div>
-        <div class="arrow">→</div>
-        <div class="flow-box"><div><strong>Backbone</strong><span>features</span></div></div>
-        <div class="arrow">→</div>
-        <div class="flow-box"><div><strong>Transformer</strong><span>global context</span></div></div>
-      </div>
-    </div>
+    <figure class="concept-figure detr-figure">
+      <svg class="detr-svg" viewBox="0 0 720 300" role="img" aria-label="DETR pipeline from image features to object query slots and matched predictions">
+        <defs>
+          <marker id="detrArrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="currentColor"></path>
+          </marker>
+        </defs>
 
-    <div class="diagram">
-      <div class="visual-row">
-        <div class="flow-box"><div><strong>Object queries</strong><span>fixed slots</span></div></div>
-        <div class="arrow">→</div>
-        <div class="flow-box"><div><strong>Predictions</strong><span>box + class or no object</span></div></div>
-      </div>
-    </div>
+        <rect x="20" y="45" width="140" height="110" rx="14" class="box hot"></rect>
+        <rect x="52" y="76" width="52" height="42" rx="5" class="box hot"></rect>
+        <rect x="85" y="96" width="44" height="34" rx="5" class="box"></rect>
+        <text x="90" y="178" text-anchor="middle">image features</text>
 
-    <section class="grid">
-      <div class="concept-card"><div class="icon">≠</div><div><h3>No anchors</h3><p>boxes directly</p></div></div>
-      <div class="concept-card"><div class="icon">1↔1</div><div><h3>Matching</h3><p>prediction ↔ object</p></div></div>
-      <div class="concept-card"><div class="icon">✂️</div><div><h3>No NMS</h3><p>set prediction</p></div></div>
+        <line x1="170" y1="100" x2="238" y2="100" class="line" marker-end="url(#detrArrow)"></line>
+
+        <rect x="250" y="42" width="190" height="116" rx="16" class="box"></rect>
+        <text x="345" y="70" text-anchor="middle">object queries</text>
+        <text x="345" y="91" text-anchor="middle" class="muted">fixed learned slots</text>
+        <rect x="282" y="112" width="24" height="24" rx="6" class="soft"></rect>
+        <rect x="314" y="112" width="24" height="24" rx="6" class="soft"></rect>
+        <rect x="346" y="112" width="24" height="24" rx="6" class="soft"></rect>
+        <rect x="378" y="112" width="24" height="24" rx="6" class="soft"></rect>
+        <text x="418" y="129" text-anchor="middle" class="muted">…</text>
+
+        <line x1="450" y1="100" x2="518" y2="100" class="line" marker-end="url(#detrArrow)"></line>
+
+        <rect x="530" y="34" width="160" height="52" rx="14" class="box hot"></rect>
+        <text x="610" y="66" text-anchor="middle">slot 1 → box</text>
+        <rect x="530" y="98" width="160" height="52" rx="14" class="box hot"></rect>
+        <text x="610" y="130" text-anchor="middle">slot 2 → box</text>
+        <rect x="530" y="162" width="160" height="52" rx="14" class="box"></rect>
+        <text x="610" y="194" text-anchor="middle">slot 3 → no object</text>
+
+        <line x1="610" y1="220" x2="610" y2="252" class="line" marker-end="url(#detrArrow)"></line>
+        <text x="610" y="282" text-anchor="middle">match predictions ↔ real objects</text>
+      </svg>
+      <figcaption>No anchors. No NMS. DETR learns a set of object slots and matches them one-to-one to the real objects.</figcaption>
+    </figure>
+
+    <section class="detr-grid">
+      <div class="note"><strong>Backbone</strong><p>turns pixels into feature maps.</p></div>
+      <div class="note"><strong>Transformer</strong><p>lets every slot look at the whole image.</p></div>
+      <div class="note"><strong>Matching</strong><p>forces one prediction per object.</p></div>
     </section>
 
     <h2>Related</h2>

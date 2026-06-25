@@ -193,7 +193,12 @@ h2 {
   box-shadow: 0 8px 26px rgba(0,0,0,.18);
 }
 
-.concept-figure img {
+.wide-figure {
+  overflow-x: auto;
+}
+
+.concept-figure img,
+.concept-figure svg {
   display: block;
   width: min(100%, 720px);
   height: auto;
@@ -201,9 +206,58 @@ h2 {
   border-radius: 12px;
 }
 
+.wide-figure svg {
+  min-width: 680px;
+}
+
 .concept-figure figcaption {
   margin-top: 10px;
   color: var(--muted);
   font-size: .9rem;
   text-align: center;
+}
+
+.compact-flow .flow-box {
+  min-height: 64px;
+}
+
+.nn-svg {
+  color: var(--accent);
+  background: radial-gradient(circle at top left, rgba(56,189,248,.14), rgba(15,23,42,.04));
+}
+
+.nn-links line {
+  stroke: currentColor;
+  stroke-width: 2;
+  opacity: .5;
+}
+
+.nn-nodes circle,
+.mini-inputs rect,
+.output-pill {
+  fill: rgba(15,23,42,.92);
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.svg-label {
+  fill: var(--good);
+  font-size: 20px;
+  font-weight: 800;
+  text-anchor: middle;
+}
+
+.svg-caption {
+  fill: var(--muted);
+  font-size: 16px;
+  text-anchor: middle;
+}
+
+.svg-node-text,
+.mini-inputs text {
+  fill: var(--text);
+  font-size: 18px;
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: middle;
 }

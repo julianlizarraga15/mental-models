@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>P-value & Power Analysis — Mental Models</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main class="page">
+    <a class="back" href="../index.html">← Home</a>
+    <div class="eyebrow">Concept</div>
+    <h1>P-value & Power Analysis</h1>
+    <p class="subtitle">Two tiny questions: “could this be noise?” and “is my test big enough to notice?”</p>
+
+    <div class="diagram">
+      <div class="visual-row compact-flow">
+        <div class="flow-box"><div><strong>Start</strong><span>Assume no real effect</span></div></div>
+        <div class="arrow">→</div>
+        <div class="flow-box"><div><strong>Observe</strong><span>See your result</span></div></div>
+        <div class="arrow">→</div>
+        <div class="flow-box"><div><strong>Ask</strong><span>How surprising?</span></div></div>
+      </div>
+    </div>
+
+    <h2>P-value</h2>
+    <p>A p-value is a “surprise score” for your result if nothing real is happening.</p>
+
+    <figure class="concept-figure wide-figure">
+      <div class="pvalue-visual" aria-label="A bell curve where only a small tail is marked as the p-value">
+        <div class="curve-area">
+          <div class="bell bell-left"></div>
+          <div class="bell bell-mid"></div>
+          <div class="bell bell-right"></div>
+          <div class="tail"></div>
+          <div class="result-line"><span>Your result</span></div>
+        </div>
+        <div class="simple-equation">
+          <span>tiny tail</span>
+          <strong>=</strong>
+          <span>small p-value</span>
+          <strong>=</strong>
+          <span>surprising if “no effect” is true</span>
+        </div>
+      </div>
+      <figcaption>The p-value is the shaded “tail”: results this extreme would be rare if there were no real effect.</figcaption>
+    </figure>
+
+    <div class="note">
+      <strong>Simple read:</strong>
+      <p>Small p-value = “this result would be unusual as pure noise.” It does not prove the effect is big, important, or true.</p>
+    </div>
+
+    <h2>Power analysis</h2>
+    <p>Power analysis asks how many observations you need before the test has a good chance to notice a real effect.</p>
+
+    <figure class="concept-figure wide-figure">
+      <div class="power-visual" aria-label="Small sample is blurry and misses an effect; larger sample is clearer and detects it">
+        <div class="power-card low-power">
+          <div class="sample-dots" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <h3>Small sample</h3>
+          <p>blurry picture</p>
+          <strong>low power</strong>
+        </div>
+        <div class="arrow">→</div>
+        <div class="power-card high-power">
+          <div class="sample-dots many" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <h3>Bigger sample</h3>
+          <p>clearer picture</p>
+          <strong>higher power</strong>
+        </div>
+      </div>
+      <figcaption>Power is the chance your study detects an effect when that effect really exists.</figcaption>
+    </figure>
+
+    <h2>One-screen memory hook</h2>
+    <section class="grid">
+      <div class="compare-card">
+        <h3>P-value</h3>
+        <p><strong>After</strong> you see data.</p>
+        <p>“Could this result be noise?”</p>
+      </div>
+      <div class="compare-card">
+        <h3>Power analysis</h3>
+        <p><strong>Before</strong> you collect data.</p>
+        <p>“How much data do I need?”</p>
+      </div>
+    </section>
+
+    <h2>Connected concepts</h2>
+    <div class="tag-row">
+      <span class="tag">Statistics</span>
+      <span class="tag">Experiments</span>
+      <span class="tag">Sample size</span>
+    </div>
+  </main>
+</body>
+</html>

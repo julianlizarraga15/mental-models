@@ -261,3 +261,23 @@ h2 {
   text-anchor: middle;
   dominant-baseline: middle;
 }
+
+.training-boxes rect {
+  fill: rgba(15,23,42,.92);
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.training-boxes text {
+  fill: var(--text);
+  font-size: 17px;
+  font-weight: 800;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.training-boxes .detail {
+  fill: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+}

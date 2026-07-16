@@ -281,3 +281,79 @@ h2 {
   font-size: 14px;
   font-weight: 700;
 }
+
+.schema-figure {
+  overflow-x: auto;
+}
+
+.schema-map {
+  position: relative;
+  width: 100%;
+  min-width: 560px;
+  min-height: 360px;
+  margin: 0 auto;
+  background:
+    linear-gradient(var(--line), var(--line)) center 92px / 2px 96px no-repeat,
+    linear-gradient(var(--line), var(--line)) center 236px / 2px 84px no-repeat,
+    linear-gradient(90deg, var(--line), var(--line)) center / 310px 2px no-repeat;
+}
+
+.snowflake-map {
+  min-width: 680px;
+  background:
+    linear-gradient(var(--line), var(--line)) center 92px / 2px 96px no-repeat,
+    linear-gradient(var(--line), var(--line)) center 236px / 2px 84px no-repeat,
+    linear-gradient(90deg, var(--line), var(--line)) center / 310px 2px no-repeat,
+    linear-gradient(90deg, var(--line), var(--line)) calc(50% + 204px) center / 92px 2px no-repeat,
+    linear-gradient(var(--line), var(--line)) calc(50% + 34px) 300px / 2px 46px no-repeat;
+}
+
+.schema-card {
+  position: absolute;
+  width: 128px;
+  min-height: 58px;
+  display: grid;
+  place-items: center;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(15,23,42,.96);
+  color: var(--text);
+  font-weight: 800;
+  text-align: center;
+  box-shadow: 0 8px 26px rgba(0,0,0,.18);
+}
+
+.schema-card span {
+  color: var(--muted);
+  font-size: .8rem;
+  font-weight: 700;
+}
+
+.fact-card {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-color: var(--accent);
+  background: radial-gradient(circle at top, rgba(56,189,248,.22), rgba(15,23,42,.96));
+}
+
+.schema-card.top { left: 50%; top: 0; transform: translateX(-50%); }
+.schema-card.right { right: calc(50% - 280px); top: 50%; transform: translateY(-50%); }
+.schema-card.bottom { left: 50%; bottom: 0; transform: translateX(-50%); }
+.schema-card.left { left: calc(50% - 280px); top: 50%; transform: translateY(-50%); }
+.schema-card.right-branch { right: 0; top: 50%; transform: translateY(-50%); }
+.schema-card.bottom-branch { left: calc(50% + 104px); bottom: 0; }
+
+.compare-card {
+  padding: 14px;
+}
+
+.compare-card h3 {
+  margin: 0 0 8px;
+}
+
+.compare-card p {
+  margin: 6px 0;
+  color: var(--muted);
+}

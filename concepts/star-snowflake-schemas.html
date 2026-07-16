@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Star and Snowflake Schemas — Mental Models</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main class="page">
+    <a class="back" href="../index.html">← Home</a>
+    <div class="eyebrow">Data warehouse shape</div>
+    <h1>Star and Snowflake Schemas</h1>
+    <p class="subtitle">one big event table → lookup tables around it</p>
+
+    <h2>The tiny idea</h2>
+    <div class="note">
+      <p>A schema is just how tables are arranged. Put the measurable events in the middle. Put descriptive lookup tables around them.</p>
+    </div>
+
+    <h2>Star schema</h2>
+    <figure class="concept-figure schema-figure">
+      <div class="schema-map star-map" aria-label="Star schema diagram">
+        <div class="schema-card fact-card">Fact table<br><span>sales rows</span></div>
+        <div class="schema-card top">Date</div>
+        <div class="schema-card right">Product</div>
+        <div class="schema-card bottom">Store</div>
+        <div class="schema-card left">Customer</div>
+      </div>
+      <figcaption>Star = one center table with simple lookup tables directly connected.</figcaption>
+    </figure>
+
+    <h2>Snowflake schema</h2>
+    <figure class="concept-figure schema-figure wide-figure">
+      <div class="schema-map snowflake-map" aria-label="Snowflake schema diagram">
+        <div class="schema-card fact-card">Fact table<br><span>sales rows</span></div>
+        <div class="schema-card top">Date</div>
+        <div class="schema-card right">Product</div>
+        <div class="schema-card right-branch">Category</div>
+        <div class="schema-card bottom">Store</div>
+        <div class="schema-card bottom-branch">Region</div>
+        <div class="schema-card left">Customer</div>
+      </div>
+      <figcaption>Snowflake = lookup tables can split into more lookup tables.</figcaption>
+    </figure>
+
+    <h2>How they compare</h2>
+    <section class="grid compare-grid">
+      <div class="card compare-card">
+        <h3>Star</h3>
+        <p>Fewer tables.</p>
+        <p>Usually easier to understand.</p>
+        <p>Often faster to query.</p>
+      </div>
+      <div class="card compare-card">
+        <h3>Snowflake</h3>
+        <p>More tables.</p>
+        <p>Less repeated text.</p>
+        <p>Often more joins.</p>
+      </div>
+    </section>
+
+    <h2>Memory hook</h2>
+    <div class="diagram compact-flow">
+      <div class="visual-row">
+        <div class="flow-box"><div><strong>Star</strong><span>wide and simple</span></div></div>
+        <div class="arrow">↔</div>
+        <div class="flow-box"><div><strong>Snowflake</strong><span>branched and tidy</span></div></div>
+        <div class="arrow">→</div>
+        <div class="flow-box"><div><strong>Tradeoff</strong><span>easy queries vs less repetition</span></div></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

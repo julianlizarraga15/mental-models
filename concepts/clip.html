@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CLIP — Mental Models</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main class="page">
+    <a class="back" href="computer-vision.html">← Computer Vision</a>
+    <div class="eyebrow">Vision-language representation model</div>
+    <h1>CLIP</h1>
+    <p class="subtitle">Image + text → comparable embeddings.</p>
+
+    <div class="diagram">
+      <div class="visual-row">
+        <div class="flow-box"><div><strong>Inputs</strong><span>image + text</span></div></div>
+        <div class="arrow">→</div>
+        <div class="flow-box"><div><strong>Dual encoder</strong><span>image encoder + text encoder</span></div></div>
+        <div class="arrow">→</div>
+        <div class="flow-box"><div><strong>Output</strong><span>vectors + similarity</span></div></div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Mental model</strong>
+      <p>CLIP learns a shared semantic space: matching images and descriptions are close together; unrelated ones are far apart.</p>
+    </div>
+
+    <h2>What it enables</h2>
+    <section class="grid">
+      <div class="concept-card">
+        <div class="icon">🏷️</div>
+        <div>
+          <h3>Zero-shot classification</h3>
+          <p>compare an image with text labels</p>
+        </div>
+      </div>
+      <div class="concept-card">
+        <div class="icon">🔎</div>
+        <div>
+          <h3>Semantic search</h3>
+          <p>find images using natural language</p>
+        </div>
+      </div>
+      <div class="concept-card">
+        <div class="icon">🧩</div>
+        <div>
+          <h3>Reusable features</h3>
+          <p>feed semantic embeddings into other systems</p>
+        </div>
+      </div>
+    </section>
+
+    <h2>Compare</h2>
+    <div class="tag-row">
+      <span class="tag">DINO: image ↔ image</span>
+      <a class="tag" href="object-detection.html">Detection: object → box</a>
+      <span class="tag">VLM: image → answer</span>
+      <span class="tag">Grounding DINO: text → boxes</span>
+    </div>
+  </main>
+</body>
+</html>

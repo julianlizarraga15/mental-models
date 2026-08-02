@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Neural Network Learning Lab</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="../assets/neural-lab.css">
+</head>
+<body>
+  <main class="lab-page">
+    <header class="lab-header">
+      <div>
+        <a class="back" href="neural-networks.html">← Neural Networks</a>
+        <div class="eyebrow">Interactive learning lab</div>
+        <h1>Watch a network learn</h1>
+        <p class="subtitle">Every step is one real gradient update. Watch the boundary bend and the connections strengthen.</p>
+      </div>
+      <div class="status-pill"><span id="statusDot"></span><span id="statusText">Ready</span></div>
+    </header>
+
+    <section class="control-bar" aria-label="Training controls">
+      <button id="playButton" class="primary">▶ Train</button>
+      <button id="stepButton">Step once</button>
+      <button id="resetButton">Reset</button>
+      <label>Dataset
+        <select id="datasetSelect">
+          <option value="xor">XOR</option>
+          <option value="linear">Linear</option>
+          <option value="circle">Circle</option>
+        </select>
+      </label>
+      <label>Speed
+        <input id="speedInput" type="range" min="1" max="60" value="12">
+        <output id="speedOutput">12×</output>
+      </label>
+      <label>Learning rate
+        <input id="rateInput" type="range" min="1" max="100" value="35">
+        <output id="rateOutput">0.35</output>
+      </label>
+    </section>
+
+    <section class="metrics" aria-label="Training metrics">
+      <div><span>Step</span><strong id="stepMetric">0</strong></div>
+      <div><span>Loss</span><strong id="lossMetric">—</strong></div>
+      <div><span>Accuracy</span><strong id="accuracyMetric">—</strong></div>
+      <div><span>Latest update</span><strong id="updateMetric">Waiting</strong></div>
+    </section>
+
+    <section class="lab-grid">
+      <article class="lab-panel boundary-panel">
+        <div class="panel-heading">
+          <div><span class="panel-kicker">What it believes</span><h2>Decision boundary</h2></div>
+          <div class="legend"><span><i class="dot coral"></i>Class 0</span><span><i class="dot mint"></i>Class 1</span></div>
+        </div>
+        <canvas id="boundaryCanvas" width="560" height="500" aria-label="Decision boundary and training data"></canvas>
+        <p class="hint">Click the plot to add a point. Hold <kbd>Shift</kbd> for class 1.</p>
+      </article>
+
+      <article class="lab-panel network-panel">
+        <div class="panel-heading">
+          <div><span class="panel-kicker">What changes</span><h2>Weights & activations</h2></div>
+          <span class="mini-legend">blue + · coral − · width = strength</span>
+        </div>
+        <canvas id="networkCanvas" width="620" height="500" aria-label="Neural network with changing weights"></canvas>
+        <div class="sample-readout">Inspecting <strong id="sampleName">x = (−0.8, −0.8)</strong> → prediction <strong id="predictionValue">—</strong></div>
+      </article>
+    </section>
+
+    <section class="lab-panel explanation-panel">
+      <div class="panel-heading">
+        <div><span class="panel-kicker">One update, unpacked</span><h2>Backpropagation</h2></div>
+      </div>
+      <div class="update-flow">
+        <div><span>1 · Predict</span><strong id="flowPrediction">—</strong><small>forward pass</small></div>
+        <b>→</b>
+        <div><span>2 · Compare</span><strong id="flowError">—</strong><small>prediction − label</small></div>
+        <b>→</b>
+        <div><span>3 · Measure</span><strong id="flowGradient">—</strong><small>largest gradient</small></div>
+        <b>→</b>
+        <div class="highlight"><span>4 · Nudge</span><strong id="flowUpdate">—</strong><small>weight change</small></div>
+      </div>
+      <canvas id="lossCanvas" width="1200" height="180" aria-label="Loss history chart"></canvas>
+    </section>
+  </main>
+  <script src="../assets/neural-lab.js"></script>
+</body>
+</html>

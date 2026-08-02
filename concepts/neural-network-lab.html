@@ -66,7 +66,9 @@
     <section class="panel network-panel">
       <header><div><span class="kicker">The model</span><h2>A 2 → 2 → 1 neural network</h2></div><p>Numbers on arrows are weights · small boxes are biases</p></header>
       <div class="network-layout">
-        <canvas id="networkCanvas" width="760" height="340" aria-label="Small neural network and its values"></canvas>
+        <div class="network-canvas-wrap" role="region" aria-label="Scrollable neural network diagram">
+          <canvas id="networkCanvas" width="760" height="340" aria-label="Small neural network and its values"></canvas>
+        </div>
         <aside class="calculation">
           <span class="kicker">Current calculation</span>
           <h3 id="calculationTitle">Not initialized</h3>

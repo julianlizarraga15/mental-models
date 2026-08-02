@@ -5,7 +5,12 @@
   const bctx = boundary.getContext('2d'), nctx = network.getContext('2d'), lctx = lossCanvas.getContext('2d');
   const sigmoid = x => 1 / (1 + Math.exp(-Math.max(-20, Math.min(20, x))));
   const rand = () => (Math.random() * 2 - 1) * 1.4;
-  let weights, data, step = 0, playing = false, timer = 0, history = [], latest = null, inspect = 0;
+  let weights, data, step = 0, playing = false, timer = 0, history = [], latest = null, inspect = 0, addLabel = 0;
+  const patternCopy = {
+    linear: '<strong>Two sides (easy)</strong><p>The 8 dots say that coral mostly belongs on one side and mint on the other. The computer tries to discover that rule.</p>',
+    circle: '<strong>Center vs outside</strong><p>The 8 dots say that mint belongs near the center and coral around the outside. The computer must discover a curved region.</p>',
+    xor: '<strong>Opposite corners</strong><p>The 8 dots say that matching diagonal corners share a color. The computer needs more than one straight dividing line.</p>'
+  };
 
   const datasets = {
     xor: [[-.75,-.75,0],[-.78,.75,1],[.75,-.72,1],[.74,.76,0],[-.55,-.88,0],[-.62,.58,1],[.58,-.58,1],[.58,.63,0]],
@@ -36,7 +41,7 @@
     $('stepMetric').textContent=step.toLocaleString(); $('lossMetric').textContent=m.loss.toFixed(4); $('accuracyMetric').textContent=Math.round(m.accuracy*100)+'%';
     if(latest){ $('updateMetric').textContent=`${latest.biggest.name}: ${latest.biggest.amount>=0?'+':''}${latest.biggest.amount.toFixed(4)}`; $('flowPrediction').textContent=latest.prediction.toFixed(3); $('flowError').textContent=(latest.error>=0?'+':'')+latest.error.toFixed(3); $('flowGradient').textContent=latest.maxGrad.toFixed(4); $('flowUpdate').textContent=(latest.biggest.amount>=0?'+':'')+latest.biggest.amount.toFixed(4); }
   }
-  function reset(){ playing=false; clearTimeout(timer); $('playButton').textContent='▶ Train'; $('statusText').textContent='Ready'; $('statusDot').parentElement.classList.remove('running'); step=0; history=[]; latest=null; data=datasets[$('datasetSelect').value].map(v=>v.slice()); initWeights(); updateMetrics(); draw(); }
+  function reset(){ playing=false; clearTimeout(timer); $('playButton').textContent='▶ Start learning'; $('statusText').textContent='Ready'; $('statusDot').parentElement.classList.remove('running'); step=0; history=[]; latest=null; data=datasets[$('datasetSelect').value].map(v=>v.slice()); $('patternExplanation').innerHTML=patternCopy[$('datasetSelect').value]; initWeights(); updateMetrics(); draw(); }
   function loop(){ if(!playing)return; const count=Math.max(1,Math.round(+$('speedInput').value/8)); for(let i=0;i<count;i++)trainOne(); timer=setTimeout(loop, Math.max(25,260-(+$('speedInput').value*4))); }
 
   function drawBoundary(){
@@ -44,6 +49,7 @@
     for(let py=0;py<h;py+=cell)for(let px=0;px<w;px+=cell){ const p=forward(px/w*2-1,1-py/h*2).o, a=.12+Math.abs(p-.5)*.62; bctx.fillStyle=p>.5?`rgba(94,234,212,${a})`:`rgba(251,113,133,${a})`; bctx.fillRect(px,py,cell+1,cell+1); }
     bctx.strokeStyle='rgba(255,255,255,.1)'; bctx.lineWidth=1; for(let i=1;i<4;i++){bctx.beginPath();bctx.moveTo(i*w/4,0);bctx.lineTo(i*w/4,h);bctx.stroke();bctx.beginPath();bctx.moveTo(0,i*h/4);bctx.lineTo(w,i*h/4);bctx.stroke();}
     data.forEach(([x,y,t],i)=>{const px=(x+1)/2*w,py=(1-y)/2*h;bctx.beginPath();bctx.arc(px,py,i===inspect?12:9,0,Math.PI*2);bctx.fillStyle=t?'#5eead4':'#fb7185';bctx.fill();bctx.strokeStyle=i===inspect?'white':'#07111f';bctx.lineWidth=i===inspect?4:3;bctx.stroke();});
+    bctx.fillStyle='rgba(248,250,252,.9)';bctx.font='700 13px system-ui';bctx.textAlign='center';bctx.fillText('left / right position →',w/2,h-12);bctx.save();bctx.translate(15,h/2);bctx.rotate(-Math.PI/2);bctx.fillText('down / up position →',0,0);bctx.restore();
   }
   function drawNetwork(){
     const w=network.width,h=network.height, ins=[[90,155],[90,345]], hidden=[80,190,310,420].map(y=>[310,y]), out=[535,250], sample=data[inspect]||data[0], f=forward(sample[0],sample[1]); nctx.clearRect(0,0,w,h);
@@ -56,9 +62,11 @@
   }
   function drawLoss(){const w=lossCanvas.width,h=lossCanvas.height;lctx.clearRect(0,0,w,h);lctx.strokeStyle='rgba(255,255,255,.1)';lctx.beginPath();lctx.moveTo(44,20);lctx.lineTo(44,h-24);lctx.lineTo(w-15,h-24);lctx.stroke(); if(history.length<2)return;const visible=history.slice(-160),max=Math.max(.7,...visible),min=Math.min(...visible)*.9;lctx.beginPath();visible.forEach((v,i)=>{const x=44+i/(visible.length-1)*(w-70),y=20+(max-v)/(max-min||1)*(h-50);i?lctx.lineTo(x,y):lctx.moveTo(x,y);});lctx.strokeStyle='#5eead4';lctx.lineWidth=4;lctx.stroke();lctx.fillStyle='#94a3b8';lctx.font='22px system-ui';lctx.fillText('loss over time',58,48);}
   function draw(){drawBoundary();drawNetwork();drawLoss();}
-  $('playButton').onclick=()=>{playing=!playing;$('playButton').textContent=playing?'Ⅱ Pause':'▶ Train';$('statusText').textContent=playing?'Learning…':'Paused';$('statusDot').parentElement.classList.toggle('running',playing);if(playing)loop();};
+  $('playButton').onclick=()=>{playing=!playing;$('playButton').textContent=playing?'Ⅱ Pause':'▶ Start learning';$('statusText').textContent=playing?'Learning…':'Paused';$('statusDot').parentElement.classList.toggle('running',playing);if(playing)loop();};
   $('stepButton').onclick=()=>{if(playing)$('playButton').click();trainOne();$('statusText').textContent='Stepped once';}; $('resetButton').onclick=reset; $('datasetSelect').onchange=reset;
   $('speedInput').oninput=e=>$('speedOutput').textContent=e.target.value+'×'; $('rateInput').oninput=e=>$('rateOutput').textContent=(e.target.value/100).toFixed(2);
-  boundary.onclick=e=>{const r=boundary.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*2-1,y=1-(e.clientY-r.top)/r.height*2;data.push([x,y,e.shiftKey?1:0]);updateMetrics();draw();};
+  const chooseLabel=label=>{addLabel=label;$('addCoral').classList.toggle('active',!label);$('addMint').classList.toggle('active',!!label);};
+  $('addCoral').onclick=()=>chooseLabel(0); $('addMint').onclick=()=>chooseLabel(1); chooseLabel(0);
+  boundary.onclick=e=>{const r=boundary.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*2-1,y=1-(e.clientY-r.top)/r.height*2;data.push([x,y,addLabel]);updateMetrics();draw();};
   reset();
 })();

@@ -12,61 +12,78 @@
     <header class="lab-header">
       <div>
         <a class="back" href="neural-networks.html">← Neural Networks</a>
-        <div class="eyebrow">Interactive learning lab</div>
-        <h1>Watch a network learn</h1>
-        <p class="subtitle">Every step is one real gradient update. Watch the boundary bend and the connections strengthen.</p>
+        <div class="eyebrow">A tiny color-prediction game</div>
+        <h1>Teach the computer where colors belong</h1>
+        <p class="subtitle">The dots are examples. The computer uses their location to guess a color for the rest of the square.</p>
       </div>
       <div class="status-pill"><span id="statusDot"></span><span id="statusText">Ready</span></div>
     </header>
 
+    <section class="quick-guide" aria-label="How this works">
+      <div><span class="guide-number">1</span><p><strong>Dots are examples</strong><br>Each dot says: “At this spot, the answer is this color.”</p></div>
+      <div><span class="guide-number">2</span><p><strong>Background is the guess</strong><br>It shows what color the computer predicts at every spot.</p></div>
+      <div><span class="guide-number">3</span><p><strong>Train to improve</strong><br>The computer adjusts its guesses to match the dots.</p></div>
+    </section>
+
     <section class="control-bar" aria-label="Training controls">
-      <button id="playButton" class="primary">▶ Train</button>
-      <button id="stepButton">Step once</button>
-      <button id="resetButton">Reset</button>
-      <label>Dataset
+      <button id="playButton" class="primary">▶ Start learning</button>
+      <button id="stepButton">Learn 1 example</button>
+      <button id="resetButton">Start over</button>
+      <label>Example pattern
         <select id="datasetSelect">
-          <option value="xor">XOR</option>
-          <option value="linear">Linear</option>
-          <option value="circle">Circle</option>
+          <option value="linear">Two sides (easy)</option>
+          <option value="circle">Center vs outside</option>
+          <option value="xor">Opposite corners</option>
         </select>
       </label>
       <label>Speed
         <input id="speedInput" type="range" min="1" max="60" value="12">
         <output id="speedOutput">12×</output>
       </label>
-      <label>Learning rate
+      <label class="technical-control">Learning rate
         <input id="rateInput" type="range" min="1" max="100" value="35">
         <output id="rateOutput">0.35</output>
       </label>
     </section>
 
     <section class="metrics" aria-label="Training metrics">
-      <div><span>Step</span><strong id="stepMetric">0</strong></div>
-      <div><span>Loss</span><strong id="lossMetric">—</strong></div>
-      <div><span>Accuracy</span><strong id="accuracyMetric">—</strong></div>
-      <div><span>Latest update</span><strong id="updateMetric">Waiting</strong></div>
+      <div><span>Examples studied</span><strong id="stepMetric">0</strong></div>
+      <div><span>Dots correct</span><strong id="accuracyMetric">—</strong></div>
+      <div class="technical-metric"><span>Mistake score</span><strong id="lossMetric">—</strong></div>
+      <div class="technical-metric"><span>Latest weight change</span><strong id="updateMetric">Waiting</strong></div>
     </section>
 
     <section class="lab-grid">
       <article class="lab-panel boundary-panel">
         <div class="panel-heading">
-          <div><span class="panel-kicker">What it believes</span><h2>Decision boundary</h2></div>
-          <div class="legend"><span><i class="dot coral"></i>Class 0</span><span><i class="dot mint"></i>Class 1</span></div>
+          <div><span class="panel-kicker">The main idea</span><h2>Computer's color prediction</h2></div>
+          <div class="legend"><span><i class="dot coral"></i>Coral</span><span><i class="dot mint"></i>Mint</span></div>
         </div>
         <canvas id="boundaryCanvas" width="560" height="500" aria-label="Decision boundary and training data"></canvas>
-        <p class="hint">Click the plot to add a point. Hold <kbd>Shift</kbd> for class 1.</p>
+        <div class="map-key"><span><i class="example-dot"></i> Dot = known answer</span><span><i class="example-bg"></i> Background = computer's guess</span></div>
+        <p class="hint">Add an example: <button id="addCoral" class="tiny coral-button">Coral dot</button> <button id="addMint" class="tiny mint-button">Mint dot</button>, then click the square.</p>
       </article>
 
-      <article class="lab-panel network-panel">
+      <article class="lab-panel meaning-panel">
         <div class="panel-heading">
-          <div><span class="panel-kicker">What changes</span><h2>Weights & activations</h2></div>
-          <span class="mini-legend">blue + · coral − · width = strength</span>
+          <div><span class="panel-kicker">What are these patterns?</span><h2>Three made-up practice games</h2></div>
         </div>
-        <canvas id="networkCanvas" width="620" height="500" aria-label="Neural network with changing weights"></canvas>
-        <div class="sample-readout">Inspecting <strong id="sampleName">x = (−0.8, −0.8)</strong> → prediction <strong id="predictionValue">—</strong></div>
+        <div class="pattern-explanation" id="patternExplanation"></div>
+        <div class="plain-example"><strong>Imagine an invisible new dot.</strong><p>The computer only knows where it is—left/right and up/down. The background shows which color the computer would give it.</p></div>
+        <p class="no-meaning">The position has no real-world meaning. This is a toy for seeing how learning works.</p>
       </article>
     </section>
 
+    <details class="under-hood">
+      <summary>Under the hood: see the neural network and its math</summary>
+      <section class="lab-panel network-panel">
+        <div class="panel-heading">
+          <div><span class="panel-kicker">What changes internally</span><h2>Connections & activations</h2></div>
+          <span class="mini-legend">blue + · coral − · width = strength</span>
+        </div>
+        <canvas id="networkCanvas" width="620" height="500" aria-label="Neural network with changing weights"></canvas>
+        <div class="sample-readout">Studying <strong id="sampleName">position</strong> → predicted mint probability <strong id="predictionValue">—</strong></div>
+      </section>
     <section class="lab-panel explanation-panel">
       <div class="panel-heading">
         <div><span class="panel-kicker">One update, unpacked</span><h2>Backpropagation</h2></div>
@@ -82,6 +99,7 @@
       </div>
       <canvas id="lossCanvas" width="1200" height="180" aria-label="Loss history chart"></canvas>
     </section>
+    </details>
   </main>
   <script src="../assets/neural-lab.js"></script>
 </body>

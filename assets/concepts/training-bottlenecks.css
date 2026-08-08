@@ -1,0 +1,97 @@
+.training-page .page { width: min(1060px, 100%); }
+    .training-page h1 { font-size: clamp(2rem, 7vw, 3.4rem); }
+    .training-page h2 { margin-top: 22px; }
+    .pipeline {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(150px, 1fr));
+      gap: 8px;
+      min-width: 980px;
+    }
+    .stage {
+      min-height: 132px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(56,189,248,.13), rgba(255,255,255,.03));
+      position: relative;
+    }
+    .stage:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -14px;
+      top: 42%;
+      color: var(--muted);
+      font-weight: 900;
+      z-index: 2;
+    }
+    .stage strong { display: block; margin-bottom: 6px; }
+    .stage span { display: block; color: var(--muted); font-size: .8rem; line-height: 1.35; }
+    .stage .tiny { color: var(--good); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; font-weight: 800; }
+    .vram-card {
+      display: grid;
+      grid-template-columns: minmax(170px, .8fr) minmax(220px, 1.2fr);
+      gap: 12px;
+      align-items: stretch;
+    }
+    .stack {
+      display: flex;
+      flex-direction: column-reverse;
+      min-height: 360px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      background: var(--panel);
+    }
+    .stack div {
+      display: grid;
+      place-items: center;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,.14);
+      font-weight: 800;
+      padding: 8px;
+    }
+    .batch { flex: .8; background: rgba(167,243,208,.14); }
+    .weights { flex: 1; background: rgba(56,189,248,.13); }
+    .optim { flex: 1.25; background: rgba(251,191,36,.14); }
+    .grads { flex: .9; background: rgba(244,114,182,.14); }
+    .acts { flex: 2.7; background: rgba(248,250,252,.16); font-size: 1.2rem; }
+    .big-note {
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      text-align: center;
+    }
+    .big-note strong { font-size: clamp(1.7rem, 6vw, 3rem); line-height: 1; }
+    .knobs { width: 100%; border-collapse: collapse; overflow: hidden; border-radius: 16px; }
+    .knobs th, .knobs td { border: 1px solid var(--line); padding: 10px; text-align: left; vertical-align: top; }
+    .knobs th { color: var(--good); background: rgba(255,255,255,.06); font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; }
+    .knobs td { color: var(--muted); font-size: .9rem; }
+    .knobs td:first-child { color: var(--text); font-weight: 800; }
+    .compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .mini-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px;
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+    }
+    .mini-card h3 { margin: 0 0 10px; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 7px; }
+    .pill { border: 1px solid var(--line); border-radius: 999px; padding: 6px 9px; color: var(--muted); font-size: .84rem; }
+    .debug { display: grid; gap: 8px; max-width: 760px; margin: 0 auto; }
+    .debug-node {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+    }
+    .debug-branches { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .debug small { display: block; color: var(--good); font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
+    @media (max-width: 720px) {
+      .vram-card, .compare, .debug-branches { grid-template-columns: 1fr; }
+      .stack { min-height: 300px; }
+      .knobs { min-width: 640px; }
+    }

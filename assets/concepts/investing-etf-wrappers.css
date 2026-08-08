@@ -1,0 +1,17 @@
+.table-card { margin-top: 18px; border: 1px solid var(--line); border-radius: 22px; background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.025)); box-shadow: 0 14px 36px rgba(0,0,0,.22); overflow: hidden; }
+    .table-scroll { overflow-x: auto; }
+    table { width: 100%; min-width: 880px; border-collapse: collapse; table-layout: fixed; }
+    th, td { padding: 16px 18px; text-align: left; vertical-align: top; }
+    th { color: var(--good); font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; border-bottom: 1px solid var(--line); background: rgba(255,255,255,.035); }
+    td { border-top: 1px solid rgba(255,255,255,.06); color: var(--muted); font-size: .94rem; line-height: 1.45; }
+    tbody tr:first-child td { border-top: 0; }
+    tbody tr:nth-child(even) { background: rgba(255,255,255,.025); }
+    tbody tr:hover { background: rgba(56,189,248,.055); }
+    .rank-col { width: 72px; } .buy-col { width: 230px; } .where-col { width: 190px; } .examples-col { width: 220px; }
+    .rank { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 999px; background: rgba(56,189,248,.12); border: 1px solid rgba(56,189,248,.28); color: var(--text); font-weight: 900; }
+    .title { display: block; color: var(--text); font-weight: 850; font-size: 1rem; line-height: 1.2; margin-bottom: 4px; }
+    .hint { display: block; color: var(--muted); font-size: .82rem; line-height: 1.35; }
+    .place { color: var(--text); font-weight: 650; }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .chip { display: inline-block; padding: 5px 9px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255,255,255,.045); color: var(--muted); font-size: .82rem; line-height: 1; white-space: nowrap; }
+    .good { color: var(--good); font-weight: 800; } .warn { color: #fde68a; font-weight: 800; }

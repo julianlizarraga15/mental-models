@@ -1,0 +1,49 @@
+.detr-page .page { width: min(760px, 100%); }
+    .detr-page h1 { font-size: clamp(2rem, 12vw, 3.4rem); }
+    .detr-page .subtitle { max-width: 640px; }
+
+    .detr-figure { padding: 12px; }
+    .detr-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      color: var(--accent);
+    }
+    .detr-svg text {
+      fill: var(--text);
+      font-size: 13px;
+      font-weight: 750;
+    }
+    .detr-svg .small {
+      fill: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .detr-svg .box {
+      fill: rgba(15,23,42,.82);
+      stroke: var(--line);
+      stroke-width: 2;
+    }
+    .detr-svg .hot { stroke: var(--accent); }
+    .detr-svg .soft { fill: currentColor; opacity: .16; }
+    .detr-svg .line {
+      stroke: currentColor;
+      stroke-width: 2.5;
+      opacity: .85;
+    }
+
+    .detr-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .detr-grid .note {
+      padding: 10px;
+      min-height: 0;
+    }
+    .detr-grid p { font-size: .8rem; }
+
+    @media (max-width: 560px) {
+      .detr-grid { grid-template-columns: 1fr; }
+    }

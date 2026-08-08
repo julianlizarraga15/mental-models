@@ -1,0 +1,27 @@
+.object-detection-page { --card-radius: 14px; }
+    .object-detection-page .page { width: min(800px, 100%); padding-top: 16px; }
+    .object-detection-page h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); }
+    .object-detection-page h2 { margin: 20px 0 8px; font-size: .78rem; letter-spacing: .11em; }
+    .object-detection-page .subtitle { font-size: .92rem; }
+    .object-detection-page .diagram { margin: 12px 0; padding: 10px; border-radius: var(--card-radius); }
+    .object-detection-page .flow-box { min-height: 58px; padding: 10px 12px; }
+    .object-detection-page .flow-box strong { font-size: .92rem; }
+    .object-detection-page .flow-box span { font-size: .78rem; }
+    .object-detection-page .arrow { font-size: 1.15rem; }
+    .object-detection-page .grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; }
+    .object-detection-page .concept-card { min-height: 88px; padding: 12px; border-radius: var(--card-radius); }
+    .object-detection-page .concept-card h3 { font-size: .98rem; }
+    .object-detection-page .concept-card p { font-size: .82rem; line-height: 1.35; }
+    .object-detection-page .icon { font-size: 1.35rem; margin-bottom: 8px; }
+    .object-detection-page .icon svg { width: 150px; height: auto; max-width: 100%; }
+    .object-detection-page .metric-grid { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
+    .object-detection-page .metric-card { min-height: 84px; }
+    .object-detection-page .metric-card.metric-wide { grid-column: span 2; }
+    .metric-kicker { color: var(--good); font-weight: 800; }
+    .metric-formula { color: var(--text); font-weight: 750; }
+    .threshold-list { margin: 8px 0 0; padding-left: 17px; color: var(--muted); font-size: .82rem; line-height: 1.35; }
+    .threshold-list strong { color: var(--text); }
+
+    @media (max-width: 520px) {
+      .metric-card.metric-wide { grid-column: auto; }
+    }

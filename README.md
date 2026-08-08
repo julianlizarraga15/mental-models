@@ -4,9 +4,26 @@ A mobile-friendly visual knowledge base for concepts discussed with ChatGPT.
 
 ## Structure
 
-- `index.html` — home page and concept map
-- `concepts/` — one HTML page per concept
+- `data/concepts.json` — canonical concept metadata and parent relationships
+- `content/` — the unique body of each concept page
+- `tools/site.py` — dependency-free site builder and validator
+- `index.html` and `concepts/` — generated static pages for GitHub Pages
 - `assets/styles.css` — shared visual style
+- `assets/concepts/` — styles used by one concept only
+
+## Editing
+
+Edit concept metadata in `data/concepts.json` and page content in the matching
+`content/<slug>.html` file. Then regenerate and validate the site:
+
+```sh
+python3 tools/site.py build
+python3 tools/site.py check
+```
+
+Do not edit `index.html` or files under `concepts/` directly; the next build will
+replace those generated files. The validator also reports stale output, unknown
+parents, missing assets, duplicate slugs, and broken local HTML links.
 
 ## Workflow
 

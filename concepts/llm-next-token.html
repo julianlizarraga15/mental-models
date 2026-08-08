@@ -7,33 +7,44 @@
   <link rel="stylesheet" href="../assets/styles.css">
   <link rel="stylesheet" href="../assets/llm-next-token.css">
 </head>
-<body>
+<body class="llm-page">
   <main class="page">
     <a class="back" href="../index.html">← Home</a>
     <div class="eyebrow">Large language models</div>
-    <h1>One Token at a Time</h1>
-    <p class="subtitle">text so far → next-token probabilities → one token → repeat</p>
+    <h1>One token<br><span>at a time.</span></h1>
+    <p class="subtitle">An LLM writes by making one small prediction, adding it to the text, and doing it all over again.</p>
 
-    <h2>See the loop</h2>
     <section class="token-demo" aria-labelledby="demo-title">
-      <div class="demo-step" id="step-count">Step 1 of 4</div>
-      <h3 id="demo-title">Text so far</h3>
-      <div class="generated-text" id="generated-text" aria-live="polite"></div>
+      <header class="demo-header">
+        <div>
+          <div class="demo-kicker">Live mental model</div>
+          <h2 id="demo-title">Predict the next token</h2>
+        </div>
+        <div class="step-progress" aria-label="Step progress">
+          <span id="step-count">1 / 4</span>
+          <div class="step-dots" id="step-dots" aria-hidden="true"></div>
+        </div>
+      </header>
+
+      <div class="sentence-stage">
+        <div class="stage-label">The text so far</div>
+        <div class="generated-text" id="generated-text" aria-live="polite"></div>
+      </div>
 
       <div class="prediction-heading">
-        <h3>Possible next tokens</h3>
-        <span>illustrative probabilities</span>
+        <h3>What could come next?</h3>
+        <span>example probabilities</span>
       </div>
       <div class="token-options" id="token-options"></div>
 
       <div class="demo-actions">
-        <button class="primary-button" id="next-token" type="button">Choose most likely token →</button>
-        <button class="secondary-button" id="reset-demo" type="button">Reset</button>
+        <button class="primary-button" id="next-token" type="button"><span>Choose the most likely</span><span aria-hidden="true">→</span></button>
+        <button class="secondary-button" id="reset-demo" type="button">Start over</button>
       </div>
       <p class="demo-status" id="demo-status" aria-live="polite"></p>
     </section>
 
-    <div class="note">
+    <div class="note loop-note">
       <strong>The whole loop</strong>
       <p>After a token is added, the model reads the updated text and calculates a brand-new set of probabilities for what could come next.</p>
     </div>

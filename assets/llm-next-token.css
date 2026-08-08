@@ -329,9 +329,6 @@
 }
 
 .loop-note strong { color: var(--demo-ink); }
-.llm-page .explainer-card { border-color: var(--demo-line); background: rgba(13, 20, 35, .5); }
-.llm-page .explainer-card h3 { color: var(--demo-ink); }
-
 @media (max-width: 440px) {
   .llm-page .page { padding-inline: 18px; }
   .llm-page .back { margin-bottom: 26px; }

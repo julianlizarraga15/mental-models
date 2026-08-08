@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How LLMs Generate Text — Mental Models</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="../assets/llm-next-token.css">
+</head>
+<body>
+  <main class="page">
+    <a class="back" href="../index.html">← Home</a>
+    <div class="eyebrow">Large language models</div>
+    <h1>One Token at a Time</h1>
+    <p class="subtitle">text so far → next-token probabilities → one token → repeat</p>
+
+    <h2>See the loop</h2>
+    <section class="token-demo" aria-labelledby="demo-title">
+      <div class="demo-step" id="step-count">Step 1 of 4</div>
+      <h3 id="demo-title">Text so far</h3>
+      <div class="generated-text" id="generated-text" aria-live="polite"></div>
+
+      <div class="prediction-heading">
+        <h3>Possible next tokens</h3>
+        <span>illustrative probabilities</span>
+      </div>
+      <div class="token-options" id="token-options"></div>
+
+      <div class="demo-actions">
+        <button class="primary-button" id="next-token" type="button">Choose most likely token →</button>
+        <button class="secondary-button" id="reset-demo" type="button">Reset</button>
+      </div>
+      <p class="demo-status" id="demo-status" aria-live="polite"></p>
+    </section>
+
+    <div class="note">
+      <strong>The whole loop</strong>
+      <p>After a token is added, the model reads the updated text and calculates a brand-new set of probabilities for what could come next.</p>
+    </div>
+
+    <h2>Keep in mind</h2>
+    <div class="grid">
+      <div class="card explainer-card">
+        <div class="icon">🧩</div>
+        <h3>Tokens are pieces</h3>
+        <p>A token can be a word, part of a word, punctuation, or even a space.</p>
+      </div>
+      <div class="card explainer-card">
+        <div class="icon">🎲</div>
+        <h3>Most likely is not guaranteed</h3>
+        <p>This demo always picks the top token. Real models often sample among likely options, which creates variety.</p>
+      </div>
+    </div>
+
+    <h2>Related</h2>
+    <div class="tag-row">
+      <a class="tag" href="neural-networks.html">Neural Networks</a>
+      <a class="tag" href="machine-learning.html">Machine Learning</a>
+    </div>
+  </main>
+  <script src="../assets/llm-next-token.js"></script>
+</body>
+</html>

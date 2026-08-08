@@ -1,0 +1,167 @@
+.token-demo {
+  margin: 12px 0 18px;
+  padding: clamp(16px, 4vw, 26px);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+  box-shadow: 0 8px 26px rgba(0,0,0,.18);
+}
+
+.token-demo h3,
+.explainer-card h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.demo-step {
+  margin-bottom: 18px;
+  color: var(--good);
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.generated-text {
+  min-height: 76px;
+  margin: 8px 0 24px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(15,23,42,.8);
+  font-size: clamp(1.2rem, 5vw, 1.7rem);
+  font-weight: 700;
+}
+
+.new-token {
+  display: inline-block;
+  color: var(--bg);
+  background: var(--good);
+  border-radius: 5px;
+  padding: 0 3px;
+  animation: token-arrives .35s ease-out;
+}
+
+@keyframes token-arrives {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.prediction-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.prediction-heading span {
+  color: var(--muted);
+  font-size: .74rem;
+}
+
+.token-options {
+  display: grid;
+  gap: 8px;
+}
+
+.token-option {
+  display: grid;
+  grid-template-columns: minmax(72px, auto) 1fr 44px;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 11px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(15,23,42,.55);
+}
+
+.token-option.is-likely { border-color: var(--accent); }
+
+.token-label {
+  overflow: hidden;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.probability-track {
+  height: 9px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--line);
+}
+
+.probability-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--muted);
+  transform-origin: left;
+  animation: bar-grows .4s ease-out both;
+}
+
+.is-likely .probability-fill { background: var(--accent); }
+
+@keyframes bar-grows {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.probability-value {
+  color: var(--muted);
+  font-size: .82rem;
+  text-align: right;
+}
+
+.demo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.primary-button,
+.secondary-button {
+  min-height: 44px;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.primary-button {
+  border: 1px solid var(--accent);
+  color: var(--bg);
+  background: var(--accent);
+}
+
+.secondary-button {
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: transparent;
+}
+
+.primary-button:focus-visible,
+.secondary-button:focus-visible {
+  outline: 3px solid var(--good);
+  outline-offset: 3px;
+}
+
+.primary-button:disabled { cursor: default; opacity: .45; }
+
+.demo-status {
+  min-height: 1.25em;
+  margin: 10px 0 0;
+  color: var(--good);
+  font-size: .85rem;
+}
+
+.explainer-card { padding: 16px; }
+.explainer-card p { margin: 6px 0 0; color: var(--muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  .new-token,
+  .probability-fill { animation: none; }
+}

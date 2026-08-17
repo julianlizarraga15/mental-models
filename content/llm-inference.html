@@ -1,23 +1,34 @@
 <section class="inference-visual" aria-label="LLM inference flow">
   <div class="flow-block">
     <div class="phase-label">LOAD ONCE</div>
-    <div class="flow-line">
+    <div class="load-flow">
       <div class="unit">
         <strong>SSD</strong>
         <small>weights</small>
         <small>config + tokenizer</small>
       </div>
       <span class="arrow" aria-hidden="true">→</span>
-      <div class="unit">
-        <strong>CPU + RAM</strong>
-        <small>read files</small>
-        <small>stage weights</small>
+      <div class="stage-stack">
+        <div class="unit">
+          <strong>CPU</strong>
+          <small>read files</small>
+        </div>
+        <div class="unit">
+          <strong>RAM</strong>
+          <small>stage weights</small>
+        </div>
       </div>
       <span class="arrow" aria-hidden="true">→</span>
-      <div class="unit accent-unit">
-        <strong>GPU + VRAM</strong>
-        <small>weights copied</small>
-        <small>weights stay loaded</small>
+      <div class="stage-stack">
+        <div class="unit">
+          <strong>GPU</strong>
+          <small>model ready</small>
+        </div>
+        <div class="unit accent-unit">
+          <strong>VRAM</strong>
+          <small>weights copied</small>
+          <small>weights stay loaded</small>
+        </div>
       </div>
     </div>
   </div>
@@ -47,12 +58,5 @@
         <small>detokenize → text</small>
       </div>
     </div>
-  </div>
-
-  <div class="role-strip" aria-label="Hardware roles">
-    <span><strong>CPU</strong> coordinates</span>
-    <span><strong>RAM</strong> CPU workspace</span>
-    <span><strong>GPU</strong> does the math</span>
-    <span><strong>VRAM</strong> GPU workspace</span>
   </div>
 </section>

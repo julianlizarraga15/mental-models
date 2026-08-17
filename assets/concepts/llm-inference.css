@@ -21,22 +21,14 @@
 
 .flow-line {
   display: grid;
-  align-items: center;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: stretch;
   gap: 6px;
 }
 
-.load-flow {
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
-}
-
-.request-flow {
-  grid-template-columns: minmax(0, .8fr) auto minmax(0, .9fr) auto minmax(0, 1.25fr) auto minmax(0, .8fr);
-}
-
-.unit,
-.compute-unit {
+.unit {
   min-width: 0;
-  padding: 10px 6px;
+  padding: 11px 7px;
   text-align: center;
   border: 1px solid var(--line);
   border-radius: 12px;
@@ -44,51 +36,76 @@
 }
 
 .unit strong,
-.unit small,
-.compute-unit strong,
-.compute-unit small {
+.unit small {
   display: block;
 }
 
-.unit strong,
-.compute-unit strong {
-  font-size: .92rem;
+.unit strong {
+  font-size: .9rem;
 }
 
-.unit small,
-.compute-unit small {
-  margin-top: 3px;
+.unit small {
+  margin-top: 4px;
   color: var(--muted);
-  font-size: .66rem;
+  font-size: .64rem;
   line-height: 1.15;
 }
 
 .arrow {
   color: var(--muted);
   font-size: 1rem;
+  align-self: center;
 }
 
-.accent-unit,
-.compute-unit {
+.accent-unit {
   border-color: var(--accent);
 }
 
-.memory-chip {
-  margin-top: 8px;
-  padding-top: 7px;
-  border-top: 1px solid var(--line);
+.mini-flow {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 7px;
+  flex-wrap: wrap;
 }
 
-.memory-chip strong {
-  color: var(--accent);
-  font-size: .72rem;
+.mini-flow span {
+  padding: 3px 6px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-size: .58rem;
+  line-height: 1;
+}
+
+.role-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.role-strip span {
+  padding: 7px 6px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: .62rem;
+  text-align: center;
+  background: rgba(255,255,255,.025);
+}
+
+.role-strip strong {
+  color: var(--text);
 }
 
 @media (max-width: 520px) {
   .flow-block { padding: 12px 9px; }
   .flow-line { gap: 4px; }
-  .unit, .compute-unit { padding: 9px 3px; }
-  .unit strong, .compute-unit > div:first-child strong { font-size: .82rem; }
-  .unit small, .compute-unit small { font-size: .6rem; }
-  .arrow { font-size: .82rem; }
+  .unit { padding: 9px 4px; }
+  .unit strong { font-size: .78rem; }
+  .unit small { font-size: .57rem; }
+  .arrow { font-size: .78rem; }
+  .mini-flow { gap: 3px; }
+  .mini-flow span { padding: 3px 4px; font-size: .52rem; }
+  .role-strip { grid-template-columns: repeat(2, 1fr); }
 }

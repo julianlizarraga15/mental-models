@@ -16,52 +16,59 @@
 <section class="inference-visual" aria-label="LLM inference flow">
   <div class="flow-block">
     <div class="phase-label">LOAD ONCE</div>
-    <div class="flow-line load-flow">
+    <div class="flow-line">
       <div class="unit">
         <strong>SSD</strong>
         <small>weights</small>
+        <small>config + tokenizer</small>
       </div>
       <span class="arrow" aria-hidden="true">→</span>
       <div class="unit">
-        <strong>RAM</strong>
-        <small>CPU memory</small>
+        <strong>CPU + RAM</strong>
+        <small>read files</small>
+        <small>stage weights</small>
       </div>
       <span class="arrow" aria-hidden="true">→</span>
       <div class="unit accent-unit">
-        <strong>VRAM</strong>
-        <small>weights stay</small>
+        <strong>GPU + VRAM</strong>
+        <small>weights copied</small>
+        <small>weights stay loaded</small>
       </div>
     </div>
   </div>
 
   <div class="flow-block">
     <div class="phase-label">EACH REQUEST</div>
-    <div class="flow-line request-flow">
+    <div class="flow-line">
       <div class="unit">
-        <strong>Prompt</strong>
+        <strong>CPU + RAM</strong>
+        <small>prompt in RAM</small>
+        <small>tokenize → IDs</small>
       </div>
       <span class="arrow" aria-hidden="true">→</span>
-      <div class="unit">
-        <strong>CPU</strong>
-        <small>tokenize</small>
-      </div>
-      <span class="arrow" aria-hidden="true">→</span>
-      <div class="compute-unit">
-        <div>
-          <strong>GPU</strong>
-          <small>math</small>
+      <div class="unit accent-unit gpu-step">
+        <strong>GPU + VRAM</strong>
+        <div class="mini-flow">
+          <span>prefill</span>
+          <span>KV cache</span>
+          <span>decode ↻</span>
         </div>
-        <div class="memory-chip">
-          <strong>VRAM</strong>
-          <small>weights + KV</small>
-        </div>
+        <small>weights + KV in VRAM</small>
       </div>
       <span class="arrow" aria-hidden="true">→</span>
       <div class="unit">
-        <strong>Token</strong>
-        <small>repeat ↻</small>
+        <strong>CPU + RAM</strong>
+        <small>token IDs return</small>
+        <small>detokenize → text</small>
       </div>
     </div>
+  </div>
+
+  <div class="role-strip" aria-label="Hardware roles">
+    <span><strong>CPU</strong> coordinates</span>
+    <span><strong>RAM</strong> CPU workspace</span>
+    <span><strong>GPU</strong> does the math</span>
+    <span><strong>VRAM</strong> GPU workspace</span>
   </div>
 </section>
   </main>

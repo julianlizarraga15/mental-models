@@ -1,0 +1,84 @@
+.dw-pipeline {
+  display: grid;
+  gap: 10px;
+  margin: 24px 0 18px;
+}
+
+.dw-stage {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: center;
+  min-height: 94px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+  box-shadow: 0 8px 26px rgba(0,0,0,.18);
+}
+
+.dw-stage strong,
+.dw-stage small {
+  display: block;
+}
+
+.dw-stage small {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: .86rem;
+}
+
+.dw-number {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  color: var(--accent);
+  font-weight: 800;
+}
+
+.dw-output {
+  border-color: var(--good);
+  background: linear-gradient(180deg, rgba(167,243,208,.13), rgba(255,255,255,.03));
+}
+
+.dw-output .dw-number {
+  border-color: var(--good);
+  color: var(--good);
+}
+
+.dw-arrow {
+  color: var(--muted);
+  font-size: 1.25rem;
+  line-height: 1;
+  text-align: center;
+  transform: rotate(90deg);
+}
+
+.dw-note {
+  margin-top: 18px;
+}
+
+@media (min-width: 860px) {
+  .discover-weekly-page .page {
+    width: min(1180px, 100%);
+  }
+
+  .dw-pipeline {
+    grid-template-columns: repeat(5, minmax(0, 1fr) auto) minmax(0, 1fr);
+    align-items: stretch;
+  }
+
+  .dw-stage {
+    grid-template-columns: 1fr;
+    align-content: start;
+    min-height: 178px;
+  }
+
+  .dw-arrow {
+    align-self: center;
+    transform: none;
+  }
+}

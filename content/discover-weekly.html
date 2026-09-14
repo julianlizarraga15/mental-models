@@ -1,0 +1,54 @@
+<section class="dw-pipeline" aria-label="Discover Weekly recommendation pipeline">
+  <article class="dw-stage">
+    <span class="dw-number">1</span>
+    <div>
+      <strong>Listening history</strong>
+      <small>What the user played, skipped, saved, and repeated.</small>
+    </div>
+  </article>
+  <span class="dw-arrow" aria-hidden="true">→</span>
+  <article class="dw-stage">
+    <span class="dw-number">2</span>
+    <div>
+      <strong>User representation</strong>
+      <small>A compact picture of the user's tastes.</small>
+    </div>
+  </article>
+  <span class="dw-arrow" aria-hidden="true">→</span>
+  <article class="dw-stage">
+    <span class="dw-number">3</span>
+    <div>
+      <strong>Candidate generation</strong>
+      <small>Find a manageable pool of songs the user may like.</small>
+    </div>
+  </article>
+  <span class="dw-arrow" aria-hidden="true">→</span>
+  <article class="dw-stage">
+    <span class="dw-number">4</span>
+    <div>
+      <strong>Ranking</strong>
+      <small>Score each candidate for this user.</small>
+    </div>
+  </article>
+  <span class="dw-arrow" aria-hidden="true">→</span>
+  <article class="dw-stage">
+    <span class="dw-number">5</span>
+    <div>
+      <strong>Re-ranking</strong>
+      <small>Balance relevance with novelty, diversity, and repetition.</small>
+    </div>
+  </article>
+  <span class="dw-arrow" aria-hidden="true">→</span>
+  <article class="dw-stage dw-output">
+    <span class="dw-number">6</span>
+    <div>
+      <strong>Weekly playlist</strong>
+      <small>About 30 songs selected as a set.</small>
+    </div>
+  </article>
+</section>
+
+<aside class="note dw-note">
+  <strong>The central idea</strong>
+  <p>The system does not compare every song with one giant model. It narrows the catalog first, then spends more effort ordering and shaping the much smaller candidate set.</p>
+</aside>

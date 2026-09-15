@@ -1,6 +1,7 @@
 [
   {"slug":"computer-vision","title":"Computer Vision","eyebrow":"Parent concept","subtitle":"Images → useful structure.","home_summary":"images → structure","icon":"👁️","parent":null,"home":true},
   {"slug":"machine-learning","title":"Machine Learning","eyebrow":"Parent concept","subtitle":"features → predictions","icon":"🧠","parent":null,"home":true},
+  {"slug":"discover-weekly","title":"Discover Weekly","eyebrow":"Recommendation systems","subtitle":"listening history → 30 new songs","icon":"🎧","parent":"machine-learning","body_class":"discover-weekly-page","styles":["concepts/discover-weekly.css"]},
   {"slug":"neural-networks","title":"Neural Networks","eyebrow":"Machine Learning","subtitle":"inputs → weighted mixes → activations → prediction","home_summary":"inputs → learned layers","icon":"🕸️","parent":"machine-learning","home":true},
   {"slug":"llm-next-token","title":"How LLMs Write","document_title":"How LLMs Generate Text","heading_html":"One token<br><span>at a time.</span>","eyebrow":"Large language models","subtitle":"An LLM writes by making one small prediction, adding it to the text, and doing it all over again.","home_summary":"text → next token → repeat","icon":"💬","parent":null,"home":true,"body_class":"llm-page","styles":["llm-next-token.css"],"scripts":["llm-next-token.js"]},
   {"slug":"llm-inference","title":"LLM Inference","eyebrow":"Large language models","subtitle":"disk → memory → GPU → tokens","home_summary":"SSD → RAM → VRAM → GPU","icon":"⚡","parent":null,"home":true,"styles":["concepts/llm-inference.css"]},

@@ -99,6 +99,92 @@
   margin-top: 18px;
 }
 
+.dw-retrieval {
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(15,23,42,.45);
+}
+
+.dw-storage,
+.dw-pool {
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+}
+
+.dw-section-label {
+  display: block;
+  margin-bottom: 9px;
+  color: var(--good);
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.dw-storage-items,
+.dw-retrievers {
+  display: grid;
+  gap: 8px;
+}
+
+.dw-storage-items div,
+.dw-retrievers article {
+  padding: 11px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(15,23,42,.58);
+}
+
+.dw-storage-items strong,
+.dw-storage-items small,
+.dw-retrievers strong,
+.dw-retrievers small,
+.dw-pool strong,
+.dw-pool small {
+  display: block;
+}
+
+.dw-storage-items small,
+.dw-retrievers small,
+.dw-pool small {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: .82rem;
+}
+
+.dw-down-arrow {
+  padding: 6px 0;
+  color: var(--muted);
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.dw-converge {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 8px;
+  align-items: center;
+  padding: 7px 10%;
+  color: var(--muted);
+}
+
+.dw-converge span {
+  height: 1px;
+  background: var(--line);
+}
+
+.dw-pool {
+  border-color: var(--accent);
+  text-align: center;
+}
+
+.dw-pool .dw-section-label {
+  margin-bottom: 5px;
+}
+
 @media (min-width: 940px) {
   .discover-weekly-page .page {
     width: min(1240px, 100%);
@@ -136,5 +222,13 @@
   .dw-arrow {
     align-self: center;
     transform: none;
+  }
+
+  .dw-storage-items {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .dw-retrievers {
+    grid-template-columns: repeat(5, 1fr);
   }
 }

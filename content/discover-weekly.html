@@ -64,3 +64,50 @@
   <strong>The central idea</strong>
   <p>Retrieval makes the problem small enough to rank carefully. Ranking chooses the strongest individual candidates. Re-ranking makes those choices work together as a playlist.</p>
 </aside>
+
+<h2>Inside retrieval</h2>
+<section class="dw-retrieval" aria-label="Candidate retrieval sources">
+  <div class="dw-storage">
+    <span class="dw-section-label">Prepared offline</span>
+    <div class="dw-storage-items">
+      <div><strong>Listening tables</strong><small>plays, skips, saves</small></div>
+      <div><strong>Catalog + features</strong><small>artists, genres, releases</small></div>
+      <div><strong>Indexes</strong><small>embeddings and similarities</small></div>
+    </div>
+  </div>
+
+  <div class="dw-down-arrow" aria-hidden="true">↓</div>
+
+  <div class="dw-retrievers">
+    <article>
+      <strong>Collaborative</strong>
+      <small>What similar listeners enjoyed</small>
+    </article>
+    <article>
+      <strong>Similar tracks</strong>
+      <small>What is often heard with songs you like</small>
+    </article>
+    <article>
+      <strong>Embedding search</strong>
+      <small>Tracks close to your user vector</small>
+    </article>
+    <article>
+      <strong>Artist and genre</strong>
+      <small>Less-known music around known preferences</small>
+    </article>
+    <article>
+      <strong>Exploration</strong>
+      <small>New and uncertain tracks worth testing</small>
+    </article>
+  </div>
+
+  <div class="dw-converge" aria-hidden="true"><span></span><b>↓</b><span></span></div>
+
+  <div class="dw-pool">
+    <div>
+      <span class="dw-section-label">Merge + deduplicate</span>
+      <strong>Candidate pool</strong>
+      <small>Thousands of tracks, each tagged with its source and retrieval score</small>
+    </div>
+  </div>
+</section>
